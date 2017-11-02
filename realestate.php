@@ -11,8 +11,8 @@ require_once 'vendor/autoload.php' ;
 DB::$dbName = 'realestate';
 DB::$user = 'realestate';
 DB::$encoding = 'utf8';
-DB::$password = '1Jn2Vn9jEnR9FWny'; //Collage Password
-//DB::$password = '06yzckiWfwsXhJRX'; // Home Password
+DB::$password = '6deNEh5AXujNY79n'; //Collage Password
+
 
 
 // Slim creation and setup
