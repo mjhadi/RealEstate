@@ -8,10 +8,10 @@ session_start();
 require_once 'vendor/autoload.php' ;
 
 //meekrodb
-DB::$dbName = 'realestate';
-DB::$user = 'realestate';
+DB::$dbName = 'cp4809_realestat';
+DB::$user = 'cp4809_realestat';
 DB::$encoding = 'utf8';
-DB::$password = '6deNEh5AXujNY79n'; //Collage Password
+DB::$password = 'b=XdL_Ar[tAm'; //Collage Password
 
 
 // Slim creation and setup
@@ -37,7 +37,9 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 };
 
-
+$app->get('/', function() use ($app) {
+    echo 'This is realestate project';
+});
 
 $app->run();
 
