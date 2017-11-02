@@ -14,7 +14,6 @@ DB::$encoding = 'utf8';
 DB::$password = '6deNEh5AXujNY79n'; //Collage Password
 
 
-
 // Slim creation and setup
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig()
