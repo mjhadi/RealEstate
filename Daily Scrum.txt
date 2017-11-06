@@ -18,7 +18,7 @@
 4.Create user stories.
 - Hana- 11/04/2017 
 1.Work  in mini project creation of master.html.twig.
-2.Search des images for the project.
+2.Search images for the project.
 - Hadi- 11/04/2017 
 1- Work in the main template
 2- Serach for content
