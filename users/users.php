@@ -5,11 +5,11 @@ if (false) {
     $app = new \Slim\Slim();
     $log = new Logger('main');
 }
-$app->get('/login', function() use ($app) {
-    $app->render('login.html.twig');
+$app->get('/user/login', function() use ($app) {
+    $app->render('user/login_user.html.twig');
 });
 
-$app->post('/login', function() use ($app) {
+$app->post('/user/login', function() use ($app) {
     $email = $app->request()->post('email');
     $pass = $app->request()->post('pass');
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
@@ -22,11 +22,11 @@ $app->post('/login', function() use ($app) {
         }
     }
     if ($error) {
-        $app->render('login.html.twig', array('error' => true));
+        $app->render('users/login_user.html.twig', array('error' => true));
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('user/login_success.html.twig', array('userSession' => $_SESSION['user']));
     }
 });
 
@@ -35,19 +35,20 @@ $app->get('/isemailregistered/:email', function($email) use ($app) {
     echo!$row ? "" : '<span style="background-color: red; font-weight: bold;">Email already taken</span>';
 });
 //register user
-$app->get('/Admin/register', function() use ($app) {
-    $app->render('/user/register.html.twig');
+$app->get('/user/register', function() use ($app) {
+    $app->render('/user/register_user.html.twig');
 });
 
-$app->post('/User/register', function() use ($app) {
+$app->post('/user/register', function() use ($app) {
     $name = $app->request()->post('name');
     $email = $app->request()->post('email');
     $address= $app->request()->post('address');
+    $userRole= $app->request()->post('userRole');
     $phone= $app->request()->post('phone');
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
     //
-    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'phone'=> $phone);
+    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole'=> $userRole, 'phone'=> $phone);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
@@ -73,12 +74,12 @@ $app->post('/User/register', function() use ($app) {
     }
     //
     if ($errorList) { // 3. failed submission
-        $app->render('/User/register.html.twig', array(
+        $app->render('/user/register_user.html.twig', array(
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $passEnc));
-        $app->render('register_success.html.twig');
+        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole'=> $userRole, 'phone'=> $phone, 'password' => $passEnc));
+        $app->render('/user/register_user_success.html.twig');
     }
 });

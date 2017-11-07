@@ -7,6 +7,7 @@ session_start();
 
 require_once 'vendor/autoload.php' ;
 
+
 //meekrodb
 DB::$dbName = 'cp4809_realestat';
 DB::$user = 'cp4809_realestat';
@@ -33,18 +34,23 @@ $log->pushHandler(new StreamHandler('logs/everything.log', Logger:: DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
 
-if (!isset($_SESSION['user'])) {
-    $_SESSION['user'] = array();
-}
 
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
+if (!isset($_SESSION['user'])) {
+    $_SESSION['user'] = array();
+}
 
 $app->get('/', function() use ($app) {
     echo 'This is realestate project';
 });
+
 require_once 'users/users.php';
+
+
+
+require_once 'admin/admin.php';
 
 $app->run();
 
