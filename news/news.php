@@ -61,14 +61,14 @@ $app->get('/admin/news/:op(/:id)', function($op, $id = -1) use ($app) {
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        echo "INVALID REQUEST"; // FIXME on Monday - display standard 404 from slim
+        $app->render('not_found.html.twig');
         return;
     }
     //
     if ($id != -1) {
         $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i', $id);
         if (!$values) {
-            echo "NOT FOUND";  // FIXME on Monday - display standard 404 from slim
+            $app->render('not_found.html.twig');
             return;
         }
     } else { // nothing to load from database - adding
@@ -89,7 +89,7 @@ $app->post('/admin/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        echo "INVALID REQUEST"; // FIXME on Monday - display standard 404 from slim
+        $app->render('not_found.html.twig');
         return;
     }
     //
