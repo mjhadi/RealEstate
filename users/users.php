@@ -5,8 +5,14 @@ if (false) {
     $app = new \Slim\Slim();
     $log = new Logger('main');
 }
+<<<<<<< HEAD
 
 // User Login
+=======
+if (!isset($_SESSION['user'])) {
+    $_SESSION['user'] = array();
+}
+>>>>>>> 5c0d0c977be0f9a55610074042a62c70bf0ff755
 $app->get('/user/login', function() use ($app) {
     $app->render('user/login_user.html.twig');
 });
