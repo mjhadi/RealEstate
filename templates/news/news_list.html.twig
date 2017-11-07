@@ -1,0 +1,24 @@
+{# empty Twig template #}
+
+{% extends "master.html.twig" %}
+{% block title %}News list{% endblock %}
+{% block content %}
+    <p><a href="/admin/news/add">Add product</a><p>
+    <table border=1>
+        <tr><th>#</th><th>Title</th><th>New Body</th><th>Date</th><th>action</th></tr>
+        {% for n in list %}
+                <tr class="{% if loop.index is odd %}rowodd{% else %}roweven{% endif %}">
+                    <td>{{n.id}}</td>
+                    <td>{{n.title}}</td>
+                    <td>{{n.newsBody}}</td>
+                    <td>{{n.newsDate}}</td>                    
+                    <td>
+                        <a href="/admin/news/delete/{{n.id}}">Delete</a>
+                        <a href="/admin/news/edit/{{n.id}}">Edit</a>
+                    </td>
+                </tr>
+        {% else %}
+            <tr><td colspan="6"> You have no news</td></tr>
+        {% endfor %}
+    </table>    
+{% endblock %}

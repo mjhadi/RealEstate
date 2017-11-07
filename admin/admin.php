@@ -10,11 +10,13 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
+// Admin Logout
 $app->get('/admin/logout', function() use ($app) {
     $_SESSION['user'] = array();
     $app->render('logout_admin.html.twig', array('userSession' => $_SESSION['user']));
 });
 
+// Admin Login
 $app->get('/admin/login', function() use ($app) {
     $app->render('login_admin.html.twig');
 });
@@ -22,7 +24,7 @@ $app->get('/admin/login', function() use ($app) {
 $app->post('/admin/login', function() use ($app) {
     $email = $app->request()->post('email');
     $pass = $app->request()->post('pass');
-    $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+    $row = DB::queryFirstRow("SELECT * FROM admin WHERE email=%s", $email);
     $error = false;
     if (!$row) {
         $error = true; // user not found
@@ -32,20 +34,21 @@ $app->post('/admin/login', function() use ($app) {
         }
     }
     if ($error) {
-        $app->render('login.html.twig', array('error' => true));
+        $app->render('login_admin.html.twig', array('error' => true));
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('login_admin_success.html.twig', array('userSession' => $_SESSION['user']));
     }
 });
 
+// Admin Email Registered
 $app->get('/isemailregistered/:email', function($email) use ($app) {
     $row = DB::queryFirstRow("SELECT * FROM admin WHERE email=%s", $email);
     echo!$row ? "" : '<span style="background-color: red; font-weight: bold;">Email already taken</span>';
 });
 
-//Register admin
+//Register Admin
 $app->get('/admin/register', function() use ($app) {
     $app->render('/admin/register_admin.html.twig');
 });
@@ -91,5 +94,5 @@ $app->post('/admin/register', function() use ($app) {
         $app->render('/admin/register_admin_success.html.twig');
     }
 });
-$app->run();
+
 
