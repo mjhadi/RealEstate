@@ -111,7 +111,7 @@ function generateRandomString($length = 10) {
 $app->map('/passreset/request', function() use ($app, $log) {
     if ($app->request()->isGet()) {
         // State 1: first show
-        $app->render('passreset_request.html.twig');
+        $app->render('user/passreset_request.html.twig');
         return;
     }
     // in Post - receiving submission
@@ -133,7 +133,7 @@ $app->map('/passreset/request', function() use ($app, $log) {
             'expiryDateTime' => date("Y-m-d H:i:s", strtotime("+5 minutes"))
         ));
         $url = 'http://' . $_SERVER['SERVER_NAME'] . '/passreset/token/' . $secretToken;
-        $emailBody = $app->view()->render('passreset_email.html.twig', array(
+        $emailBody = $app->view()->render('user/passreset_email.html.twig', array(
             'name' => $user['name'], // or 'username' or 'firstName'
             // 'name' => 'User', if you don't have user's name in your database
             'url' => $url
@@ -147,21 +147,21 @@ $app->map('/passreset/request', function() use ($app, $log) {
 
         mail($toEmail, "Your password reset for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         $log->info('Email sent for password reset for user id=' . $user['id']);
-        $app->render('passreset_request_success.html.twig');
+        $app->render('user/passreset_request_success.html.twig');
     } else { // State 3: failed request, email not registered
-        $app->render('passreset_request.html.twig', array('error' => true));
+        $app->render('user/passreset_request.html.twig', array('error' => true));
     }
 })->via('GET', 'POST');
 
 $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $log) {
     $row = DB::queryFirstRow("SELECT * FROM passresets WHERE secretToken=%s", $secretToken);
     if (!$row) { // row not found
-        $app->render('passreset_notfound_expired.html.twig');
+        $app->render('user/passreset_notfound_expired.html.twig');
         return;
     }
     if (strtotime($row['expiryDateTime']) < time()) {
         // row found but token expired
-        $app->render('passreset_notfound_expired.html.twig');
+        $app->render('user/passreset_notfound_expired.html.twig');
         return;
     }
     //
@@ -172,7 +172,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         return;
     }
     if ($app->request()->isGet()) { // State 1: first show
-        $app->render('passreset_form.html.twig', array(
+        $app->render('user/passreset_form.html.twig', array(
             'name' => $user['name'], 'email' => $user['email']
         ));
     } else { // receiving POST with new password
@@ -192,14 +192,14 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
             }
         }
         if ($errorList) { // 3. failed submission
-            $app->render('passreset_form.html.twig', array(
+            $app->render('user/passreset_form.html.twig', array(
                 'errorList' => $errorList,
                 'name' => $user['name'],
                 'email' => $user['email']
             ));
         } else { // 2. successful submission
             DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
-            $app->render('passreset_form_success.html.twig');
+            $app->render('user/passreset_form_success.html.twig');
         }
     }
 })->via('GET', 'POST');
