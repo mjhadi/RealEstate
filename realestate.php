@@ -50,6 +50,7 @@ require_once 'users/users.php';
 
 
 require_once 'admin/admin.php';
+require_once 'news/news.php';
 
 $app->run();
 
