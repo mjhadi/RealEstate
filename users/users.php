@@ -5,6 +5,8 @@ if (false) {
     $app = new \Slim\Slim();
     $log = new Logger('main');
 }
+
+// User Login
 $app->get('/user/login', function() use ($app) {
     $app->render('user/login_user.html.twig');
 });
@@ -22,7 +24,7 @@ $app->post('/user/login', function() use ($app) {
         }
     }
     if ($error) {
-        $app->render('/users/login_user.html.twig', array('error' => true));
+        $app->render('/user/login_user.html.twig', array('error' => true));
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
@@ -30,11 +32,13 @@ $app->post('/user/login', function() use ($app) {
     }
 });
 
+// Is user email registered
 $app->get('/isemailregistered/:email', function($email) use ($app) {
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     echo!$row ? "" : '<span style="background-color: red; font-weight: bold;">Email already taken</span>';
 });
-//register user
+
+//Register User
 $app->get('/user/register', function() use ($app) {
     $app->render('/user/register_user.html.twig');
 });
@@ -42,13 +46,13 @@ $app->get('/user/register', function() use ($app) {
 $app->post('/user/register', function() use ($app) {
     $name = $app->request()->post('name');
     $email = $app->request()->post('email');
-    $address= $app->request()->post('address');
-    $userRole= $app->request()->post('userRole');
-    $phone= $app->request()->post('phone');
+    $address = $app->request()->post('address');
+    $userRole = $app->request()->post('userRole');
+    $phone = $app->request()->post('phone');
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
     //
-    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole'=> $userRole, 'phone'=> $phone);
+    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
@@ -69,9 +73,13 @@ $app->post('/user/register', function() use ($app) {
         array_push($errorList, "Passwords don't match");
     } else { // TODO: do a better check for password quality (lower/upper/numbers/special)
         if (strlen($pass1) < 2 || strlen($pass1) > 50) {
-            array_push($errorList, "Password must be between 2 and 50 characters long");
+            array_push($errorList, "Password too short, must be 6 characters or longer");
         }
-    }
+        if (preg_match('/[A-Z]/', $pass1) != 1 || preg_match('/[a-z]/', $pass1) != 1 || preg_match('/[0-9]/', $pass1) != 1) {
+            array_push($errorList, "Password must contain at least one lowercase, "
+                    . "one uppercase letter, and a digit");
+        }
+    }    
     //
     if ($errorList) { // 3. failed submission
         $app->render('/user/register_user.html.twig', array(
@@ -79,7 +87,7 @@ $app->post('/user/register', function() use ($app) {
             'v' => $values));
     } else { // 2. successful submission
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole'=> $userRole, 'phone'=> $phone, 'password' => $passEnc));
+        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc));
         $app->render('/user/register_user_success.html.twig');
     }
 });
