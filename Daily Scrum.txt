@@ -26,4 +26,11 @@
 1. Work  in mini project for twig.
 - Hadi- 11/06/2017 
 1- Work in the mini project to login by facebook 
+-Hana - 11/07/2017
+1-User(Buyer-Seller) registration and login 
+2- Property(Crud)
+-Hadi - 11/07/2017
+1-User(Buyer-Seller) registration and login 
+2- News(Crud)
+
 
