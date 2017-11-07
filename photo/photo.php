@@ -13,5 +13,5 @@ $app->get('/photo/add', function() use ($app) {
         $app->render('access_denied.html.twig');
         return;
     }
-    $app->render('todo_addedit.html.twig');
+    $app->render('/photo/photo_add.html.twig');
 });
