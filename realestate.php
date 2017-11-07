@@ -7,7 +7,7 @@ session_start();
 
 require_once 'vendor/autoload.php' ;
 
-//meekrodb
+
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
 DB::$encoding = 'utf8';
@@ -52,7 +52,6 @@ $log->pushHandler(new StreamHandler('logs/everything.log', Logger:: DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
 
-
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
@@ -65,10 +64,6 @@ $app->get('/', function() use ($app) {
 });
 
 require_once 'users/users.php';
-
-
-
-require_once 'admin/admin.php';
 require_once 'news/news.php';
 
 $app->run();
