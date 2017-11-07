@@ -1,0 +1,19 @@
+{# empty Twig template #}
+{% extends "master.html.twig" %}
+{% block title %}Confirm delete{% endblock %}
+{% block content %}
+    <p><br>Are you sure you want to delete this product?</b></p>
+    <form action="/admin/products/list" style="display:inline;">            
+        <input type="submit" value="Candel">
+    </form>
+    <form method="post" action="/admin/products/delete/{{p.id}}" style="display:inline;">            
+        <input type="hidden" name="confirmed" value="true">
+        <input type="submit" value="Delete">
+    </form>
+    <div>
+        <p>Name: {{p.name}}</p>
+        <p>description: {{p.description}}</p>
+        <p>Price: {{p.price}}</p>
+        <img src="">        
+    </div>
+{% endblock %}
