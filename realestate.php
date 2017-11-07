@@ -7,7 +7,6 @@ session_start();
 
 require_once 'vendor/autoload.php' ;
 
-
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
 DB::$encoding = 'utf8';
@@ -51,13 +50,12 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger:: DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
-
-$twig = $app->view()->getEnvironment();
-$twig->addGlobal('userSession', $_SESSION['user']);
-
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
+
+$twig = $app->view()->getEnvironment();
+$twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
     echo 'This is realestate project';

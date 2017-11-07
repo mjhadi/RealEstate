@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
 
 
 // veiw of list of news 
-$app->get('/admin/news/list', function() use ($app) {
+$app->get('/news/list', function() use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
@@ -22,7 +22,7 @@ $app->get('/admin/news/list', function() use ($app) {
 });
 
 // Delete News 
-$app->get('/admin/news/delete/:id', function($id) use ($app) {
+$app->get('/news/delete/:id', function($id) use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
@@ -35,7 +35,7 @@ $app->get('/admin/news/delete/:id', function($id) use ($app) {
     $app->render("news/news_delete.html.twig", array('n' => $news));
 });
 
-$app->get('/admin/news/delete/:id', function($id) use ($app) {
+$app->get('/news/delete/:id', function($id) use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
@@ -55,7 +55,7 @@ $app->get('/admin/news/delete/:id', function($id) use ($app) {
 
 // Add-Edit News
 // check if the user logged in
-$app->get('/admin/news/:op(/:id)', function($op, $id = -1) use ($app) {
+$app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
         $app->render('access_denied.html.twig');
         return;
@@ -83,7 +83,7 @@ $app->get('/admin/news/:op(/:id)', function($op, $id = -1) use ($app) {
     'id' => '\d+'
 ));
 
-$app->post('/admin/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
+$app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
         $app->render('access_denied.html.twig');
         return;
@@ -106,7 +106,7 @@ $app->post('/admin/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     }
     if (strlen($newsBody) < 2 || strlen($newsBody) > 2000) {
         $values['newsBody'] = '';
-        array_push($errorList, "newsBody must be 2-2000 characters long");
+        array_push($errorList, "News Body must be 2-2000 characters long");
     }
     if (!DateTime::createFromFormat('Y-m-d', $newsDate)) {
         $values['newsDate'] = '';

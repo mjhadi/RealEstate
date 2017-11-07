@@ -32,7 +32,7 @@ $app->post('/user/login', function() use ($app) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('/user/login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('/user/login_user_success.html.twig', array('userSession' => $_SESSION['user']));
     }
 });
 

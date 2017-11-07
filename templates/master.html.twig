@@ -12,9 +12,9 @@
             
             <div id="header">
                 {% if userSesion %}
-                    <p>Welcome {{ userSesion.firstname }}, you may <a href="/logout">logout</a>.</p>
+                    <p>Welcome {{ userSesion.firstname }}, you may <a href="/user/logout">logout</a>.</p>
                 {% else %}
-                    <p>You may <a href="/login">login</a> or <a href="/register">register</a>.</p>
+                    <p>You may <a href="/user/login">login</a> or <a href="/user/register">register</a>.</p>
                 {% endif %}
             </div>
             <div id="content">
