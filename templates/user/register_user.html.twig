@@ -24,10 +24,11 @@
         </ul>
     {% endif %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         Name: <input type="text" name="name" value="{{v.name}}"><br> 
         Address: <input type="text" name="address" value="{{v.address}}"><br> 
         Phone: <input type="text" name="phone" value="{{v.phone}}"><br> 
+        Image: <input type="file" name="userImage" ><br>
         Role:
         <select name="userRole">
             <option value="Admin">Admin</option>
@@ -35,8 +36,10 @@
             <option value="Seller">Seller</option>
         </select><br> 
         Email: <input type="email" name="email" value="{{v.email}}"><span id="isTaken"></span><br>
+       
         Password: <input type="password" name="pass1"><br>
         Password (repeated): <input type="password" name="pass2"><br>
+
         <input type="submit" value="Register">
     </form>
 

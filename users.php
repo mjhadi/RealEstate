@@ -23,8 +23,8 @@ $app->post('/user/login', function() use ($app) {
     if (!$row) {
         $error = true; // user not found
     } else {
-        if (password_verify($pass, $row['password']) == FALSE) {
-            $error = true; // password invalid
+        if (password_verify($pass, $row['password'])) {
+            $error = false; // password invalid
         }
     }
     if ($error) {
@@ -52,6 +52,7 @@ $app->post('/user/register', function() use ($app) {
     $email = $app->request()->post('email');
     $address = $app->request()->post('address');
     $userRole = $app->request()->post('userRole');
+    $pathImage = $app->request()->post('pathImage');
     $phone = $app->request()->post('phone');
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
@@ -84,6 +85,37 @@ $app->post('/user/register', function() use ($app) {
                     . "one uppercase letter, and a digit");
         }
     }
+    //image of user
+    $userImage = array();
+    // is file being uploaded
+    if ($_FILES['userImage']['error'] != UPLOAD_ERR_NO_FILE) {
+        $userImage = $_FILES['userImage'];
+        if ($userImage['error'] != 0) {
+            array_push($errorList, "Error uploading file");
+            $log->err("Error uploading file: " . print_r($userImage, true));
+        } else {
+            if (strstr($userImage['name'], '..')) {
+                array_push($errorList, "Invalid file name");
+                $log->warn("Uploaded file name with .. in it (possible attack): " . print_r($userImage, true));
+            }
+            // TODO: check if file already exists, check maximum size of the file, dimensions of the image etc.
+            $info = getimagesize($userImage["tmp_name"]);
+            if ($info == FALSE) {
+                array_push($errorList, "File doesn't look like a valid image");
+            } else {
+                if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/gif' || $info['mime'] == 'image/png') {
+                    // image type is valid - all good
+                } else {
+                    array_push($errorList, "Image must be a JPG, GIF, or PNG only.");
+                }
+            }
+        }
+    } else { // no file uploaded
+        
+            array_push($errorList, "Image is required when creating new product");
+        
+    }
+
     //
     if ($errorList) { // 3. failed submission
         $app->render('/user/register_user.html.twig', array(
@@ -91,7 +123,7 @@ $app->post('/user/register', function() use ($app) {
             'v' => $values));
     } else { // 2. successful submission
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc));
+        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc, 'pathImage'=>$pathImage));
         $app->render('/user/register_user_success.html.twig');
     }
 });
