@@ -8,11 +8,30 @@ session_start();
 require_once 'vendor/autoload.php' ;
 
 //meekrodb
-DB::$dbName = 'cp4809_realestat';
+DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
 DB::$encoding = 'utf8';
 DB::$password = 'b=XdL_Ar[tAm'; //Collage Password
 
+DB::$error_handler = 'sql_error_handler';
+DB::$nonsql_error_handler = 'nonsql_error_handler';
+
+function sql_error_handler($params) {
+    global $app, $log;
+    $log->err("SQL Error: " . $params['error']);
+    $log->err(" in query: " . $params['query']);
+    http_response_code(500);
+    $app->render('error_internal.html.twig');
+    die;
+}
+
+function nonsql_error_handler($params) {
+    global $app, $log;
+    $log->err("SQL Error: " . $params['error']);
+    http_response_code(500);
+    $app->render('error_internal.html.twig');
+    die;
+}
 
 // Slim creation and setup
 $app = new \Slim\Slim(array(
