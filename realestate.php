@@ -7,7 +7,6 @@ session_start();
 
 require_once 'vendor/autoload.php' ;
 
-
 //meekrodb
 DB::$dbName = 'cp4809_realestat';
 DB::$user = 'cp4809_realestat';

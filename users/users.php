@@ -22,11 +22,11 @@ $app->post('/user/login', function() use ($app) {
         }
     }
     if ($error) {
-        $app->render('users/login_user.html.twig', array('error' => true));
+        $app->render('/users/login_user.html.twig', array('error' => true));
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('user/login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('/user/login_success.html.twig', array('userSession' => $_SESSION['user']));
     }
 });
 
