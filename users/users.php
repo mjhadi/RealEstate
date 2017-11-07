@@ -5,6 +5,9 @@ if (false) {
     $app = new \Slim\Slim();
     $log = new Logger('main');
 }
+if (!isset($_SESSION['user'])) {
+    $_SESSION['user'] = array();
+}
 $app->get('/user/login', function() use ($app) {
     $app->render('user/login_user.html.twig');
 });
