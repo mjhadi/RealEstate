@@ -30,25 +30,25 @@ $app->get('/news/delete/:id', function($id) use ($app) {
     }
     $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d AND userId=%i", $id, $_SESSION['user']['id']);
     if (!$news) {
-        $app->render("/news/not_found.html.twig");
+        $app->render("/not_found.html.twig");
         return;
     }
     $app->render("/news/news_delete.html.twig", array('n' => $news));
 });
 
-$app->get('/news/delete/:id', function($id) use ($app) {
+$app->post('/news/delete/:id', function($id) use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
     }
     $confirmed = $app->request()->post('confirmed');
     if ($confirmed != 'true') {
-        $app->render('/news/not_found.html.twig');
+        $app->render('/not_found.html.twig');
         return;
     }
     DB::delete('news', "id=%i AND userId=%i", $id, $_SESSION['user']['id']);
     if (DB::affectedRows() == 0) {
-        $app->render('/news/not_found.html.twig');
+        $app->render('/not_found.html.twig');
     } else {
         $app->render('/news/news_delete_success.html.twig');
     }
@@ -61,14 +61,14 @@ $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        $app->render('/news/not_found.html.twig');
+        $app->render('/not_found.html.twig');
         return;
     }
     //
     if ($id != -1) {
         $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i AND userId=%i', $id, $_SESSION['user']['id']);
         if (!$values) {
-            $app->render('/news/not_found.html.twig');
+            $app->render('/not_found.html.twig');
             return;
         }
     } else { // nothing to load from database - adding
@@ -89,7 +89,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        $app->render('/news/not_found.html.twig');
+        $app->render('/not_found.html.twig');
         return;
     }
     //
