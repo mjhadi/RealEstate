@@ -15,7 +15,7 @@
         
         Image: <input type="file" name="userImage" ><br>
         
-        <input type="submit" value="Add photo">
+        <input type="submit" value="{% if isEditing %}updat{% else %}Add{% endif %}  photo">
     </form>
 
 {% endblock %}

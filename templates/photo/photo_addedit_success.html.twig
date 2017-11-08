@@ -4,7 +4,7 @@
 
 {% block content %}
     
-<p>Image has addedd  succesfully,<a href="/">Click to continue</a>.</p>
+<p>Image has {% if isEditing %}updated{% else %}added{% endif %}  succesfully,<a href="/photo/list">Click to continue</a>.</p>
 
 {% endblock %}
 

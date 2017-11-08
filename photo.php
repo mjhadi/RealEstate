@@ -139,17 +139,17 @@ $app->get('/photo/delete/:id', function($id) use ($app) {
     $app->render("/photo/photo_delete.html.twig", array('images' => $images));
 });
 
-$app->get('/photo/delete/:id', function($id) use ($app) {
+$app->post('/photo/delete/:id', function($id) use ($app) {
     if (!$_SESSION['user'] ) {
         $app->render("access_denied.html.twig");
         return;
     }
     $confirmed = $app->request()->post('confirmed');
     if ($confirmed != 'true') {
-        $app->render('/news/not_found.html.twig');
+        $app->render('not_found.html.twig');
         return;
     }
-    DB::delete('news', "id=%i", $id);
+    DB::delete('images', "imageId=%i", $id);
     if (DB::affectedRows() == 0) {
         $app->render('not_found.html.twig');
     } else {
