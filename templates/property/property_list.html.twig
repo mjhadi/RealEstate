@@ -1,23 +1,28 @@
 {% extends "master.html.twig" %}
-{% block title %}Photo list{% endblock %}
+{% block title %}Property list{% endblock %}
 {% block content %}
-    <p><a href="/property/add">Add property</a><p>
+    <p><a href="/property/add">Add Property</a><p>
     <table border=1>
-        <tr><th>#</th><th>Image Title</th><th>Picture</th><th>action</th></tr>
-        {% for img in list %}
+          <tr><th>#</th><th>PropertyType</th><th>Latitude</th><th>Longitude</th><th>Beds</th>
+              <th>Baths</th><th>Price</th><th>SqureFeet</th><th>Image</th><th>action</th></tr>
+        {% for p in list %}
                 <tr class="{% if loop.index is odd %}rowodd{% else %}roweven{% endif %}">
-                    <td>{{img.imageId}}</td>
-                    <td>{{img.imageTitle}}</td>
-                    <td><img src="{{img.imagePath}}"  width="150"></td>
-                                   
+                    <td>{{p.propertyId}}</td>
+                    <td>{{p.propertyType}}</td>
+                    <td>{{p.latitude}}</td>
+                    <td>{{p.longitude}}</td>
+                    <td>{{p.beds}}</td>
+                    <td>{{p.baths}}</td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.squreFeet}}</td> 
+                    <td><img src="{{p.imagePath}}"  width="150"></td>
                     <td>
-                        <a href="/photo/delete/{{img.imageId}}">Delete</a>
-                        <a href="/photo/edit/{{img.imageId}}">Edit</a>
+                        <a href="/property/delete/{{p.propertyId}}">Delete</a>
+                        <a href="/property/edit/{{p.propertyId}}">Edit</a>
                     </td>
                 </tr>
         {% else %}
-            <tr><td colspan="6"> You have no images</td></tr>
+            <tr><td colspan="6"> You have no property</td></tr>
         {% endfor %}
     </table>    
 {% endblock %}
-

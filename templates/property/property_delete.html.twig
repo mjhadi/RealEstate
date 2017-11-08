@@ -2,11 +2,11 @@
 {% extends "master.html.twig" %}
 {% block title %}Confirm delete{% endblock %}
 {% block content %}
-    <p><br>Are you sure you want to delete this news?</b></p>
-    <form action="/news/list" style="display:inline;">            
+    <p><br>Are you sure you want to delete this property?</b></p>
+    <form action="/property/list" style="display:inline;">            
         <input type="submit" value="Candel">
     </form>
-    <form method="post" action="/news/delete/{{n.newsId}}" style="display:inline;">            
+    <form method="post" action="/property/delete/{{p.propertyId}}" style="display:inline;">            
         <input type="hidden" name="confirmed" value="true">
         <input type="submit" value="Delete">
     </form>    

@@ -54,7 +54,8 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
     $price = $app->request()->post('price');
     $squreFeet = $app->request()->post('squreFeet');
     //
-    $values = array('propertyType' => $propertyType, 'latitude' => $latitude, 'longitude' => $longitude, 'beds' => $beds, 'baths' => $baths, 'price' => $price, 'squreFeet' => $squreFeet);
+    $values = array('propertyType' => $propertyType, 'latitude' => $latitude, 'longitude' => $longitude, 'beds' => $beds, 
+        'baths' => $baths, 'price' => $price, 'squreFeet' => $squreFeet);
 
     $errorList = array();
     //
@@ -63,7 +64,6 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
         array_push($errorList, "Latitude must be between -90 and 90.");
         $values['latitude'] = "";
     }
-
     //validate Longitude
     if ($longitude == '' || $longitude < -180 || $longitude > 180) {
         array_push($errorList, "Longitude must be between -180 and 180.");
@@ -151,3 +151,46 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
     'op' => '(edit|add)',
     'id' => '\d+'
 ));
+
+// Veiw of list of property 
+$app->get('/property/list', function() use ($app) {
+    if (!$_SESSION['user'] ) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $userId = $_SESSION['user']['userId'];
+    $propertyList = DB::query("SELECT * FROM property WHERE userId =%i", $userId);
+    $app->render("/property/property_list.html.twig", array('list' => $propertyList));
+});
+
+// Delete Property 
+$app->get('/property/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $property = DB::queryFirstRow("SELECT * FROM property WHERE propertyId=%d AND userId=%i", $id, $_SESSION['user']['userId']);
+    if (!$property) {
+        $app->render("/not_found.html.twig");
+        return;
+    }
+    $app->render("/property/property_delete.html.twig", array('p' => $property));
+});
+
+$app->post('/property/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $confirmed = $app->request()->post('confirmed');
+    if ($confirmed != 'true') {
+        $app->render('/not_found.html.twig');
+        return;
+    }
+    DB::delete('property', "propertyId=%i AND userId=%i", $id, $_SESSION['user']['userId']);
+    if (DB::affectedRows() == 0) {
+        $app->render('/not_found.html.twig');
+    } else {
+        $app->render('/property/property_delete_success.html.twig');
+    }
+});
