@@ -61,8 +61,9 @@ $app->get('/', function() use ($app) {
     echo 'This is realestate project';
 });
 
-require_once 'users/users.php';
-require_once 'news/news.php';
+require_once 'users.php';
+require_once 'news.php';
+require_once 'photo.php';
 
 $app->run();
 

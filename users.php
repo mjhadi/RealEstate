@@ -15,7 +15,7 @@ $app->get('/user/login', function() use ($app) {
     $app->render('user/login_user.html.twig');
 });
 
-$app->post('/user/login', function() use ($app) {
+$app->post('/user/login', function() use ($app , $log) {
     $email = $app->request()->post('email');
     $pass = $app->request()->post('pass');
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);

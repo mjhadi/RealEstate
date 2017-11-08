@@ -1,1 +1,25 @@
-{# empty Twig template #}
+{% extends "master.html.twig" %}
+
+{% block title %}Add Photo{% endblock %}
+
+
+
+{% block content %}
+    {% if errorList %}
+        <ul>
+            {% for error in errorList %}
+                <li>{{error}}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        Image Title: <input type="text" name="imageTitle" value="{{v.imageTitle}}"><br> 
+        
+        Image: <input type="file" name="userImage" ><br>
+        
+        <input type="submit" value="Add photo">
+    </form>
+
+{% endblock %}
+
