@@ -18,7 +18,7 @@ $app->get('/news/list', function() use ($app) {
         return;
     }
     $newsList = DB::query("SELECT * FROM news");
-    $app->render("news/news_list.html.twig", array('list' => $newsList));
+    $app->render("/news/news_list.html.twig", array('list' => $newsList));
 });
 
 // Delete News 
@@ -29,10 +29,10 @@ $app->get('/news/delete/:id', function($id) use ($app) {
     }
     $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d", $id);
     if (!$news) {
-        $app->render("news/not_found.html.twig");
+        $app->render("/news/not_found.html.twig");
         return;
     }
-    $app->render("news/news_delete.html.twig", array('n' => $news));
+    $app->render("/news/news_delete.html.twig", array('n' => $news));
 });
 
 $app->get('/news/delete/:id', function($id) use ($app) {
@@ -42,33 +42,32 @@ $app->get('/news/delete/:id', function($id) use ($app) {
     }
     $confirmed = $app->request()->post('confirmed');
     if ($confirmed != 'true') {
-        $app->render('news/not_found.html.twig');
+        $app->render('/news/not_found.html.twig');
         return;
     }
     DB::delete('news', "id=%i", $id);
     if (DB::affectedRows() == 0) {
-        $app->render('news/not_found.html.twig');
+        $app->render('/news/not_found.html.twig');
     } else {
-        $app->render('news/news_delete_success.html.twig');
+        $app->render('/news/news_delete_success.html.twig');
     }
 });
 
 // Add-Edit News
-// check if the user logged in
 $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
-    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') { // check if the user logged in and role is admin
         $app->render('access_denied.html.twig');
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        $app->render('not_found.html.twig');
+        $app->render('/news/not_found.html.twig');
         return;
     }
     //
     if ($id != -1) {
         $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i', $id);
         if (!$values) {
-            $app->render('not_found.html.twig');
+            $app->render('/news/not_found.html.twig');
             return;
         }
     } else { // nothing to load from database - adding
@@ -89,7 +88,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         return;
     }
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
-        $app->render('not_found.html.twig');
+        $app->render('/news/not_found.html.twig');
         return;
     }
     //
