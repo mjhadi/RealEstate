@@ -1,0 +1,10 @@
+{% extends "master.html.twig" %}
+
+{% block title %}{% if isEditing %}updated{% else %}added{% endif %} successful{% endblock %}
+
+{% block content %}
+    
+<p>Property has {% if isEditing %}updated{% else %}added{% endif %}  succesfully,<a href="/property/list">Click to continue</a>.</p>
+
+{% endblock %}
+

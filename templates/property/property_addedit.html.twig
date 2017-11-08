@@ -1,1 +1,39 @@
-{# empty Twig template #}
+{%extends "master.html.twig" %}
+
+{% block title %}Add property{% endblock %}
+
+
+{% block content %}
+
+    {% if errorList %}
+        <ul>
+            {% for error in errorList %}
+                <li>{{error}}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        Property Type: 
+        <select name="propertyType">
+            <option value="Appartement">Appartement</option>
+            <option value="Condo">Condo</option>
+            <option value="House">House</option>
+            <option value="Store">Store</option>
+            <option value="Villa">Villa</option>
+            
+            
+        </select><br>
+        Latitude:  <input type="number" min="-90 " max="+90 " step="0.01" name="latitude" value="{{v.latitude}}"><br>
+        Longitude: <input type="number" min="-180 " max="+180 " step="0.01" name="longitude" value="{{v.longitude}}"><br>
+        Beds: <input type="number" min="0" max="10" step="1" name="beds" value="{{v.beds}}"><br>
+        Baths: <input type="number" min="0" max="10" step="1" name="baths" value="{{v.baths}}"><br>
+        Price: <input type="number" min="0" max="999999" step="0.01" name="squreFeet" value="{{v.squreFeet}}"><br>
+        SqureFeet: <input type="number" min="0" max="999999" step="0.01" name="price" value="{{v.price}}"><br>
+        image: <input type="file" name="productImage" ><br><br>
+        <input type="submit" value="Add Property">
+    </form>
+
+
+{% endblock %}
+

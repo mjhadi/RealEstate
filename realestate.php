@@ -64,6 +64,6 @@ $app->get('/', function() use ($app) {
 require_once 'users.php';
 require_once 'news.php';
 require_once 'photo.php';
-
+require_once 'property.php';
 $app->run();
 
