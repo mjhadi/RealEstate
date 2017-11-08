@@ -32,5 +32,11 @@
 -Hadi - 11/07/2017
 1-User(Buyer-Seller) registration and login 
 2- News(Crud)
+-Hana - 11/08/2017
+1-Pictures Crud
+2- Property(Crud)
+-Hadi - 11/08/2017
+1- News(Crud)
+2-login with facebook 
 
 
