@@ -17,7 +17,8 @@ $app->get('/news/list', function() use ($app) {
         $app->render("access_denied.html.twig");
         return;
     }
-    $newsList = DB::query("SELECT * FROM news");
+    $userId = $_SESSION['user']['id'];
+    $newsList = DB::query("SELECT * FROM news WHERE userId =%i", $userId);
     $app->render("/news/news_list.html.twig", array('list' => $newsList));
 });
 
