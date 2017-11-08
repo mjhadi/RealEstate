@@ -1,8 +1,5 @@
 {% extends "master.html.twig" %}
-
-{% block title %}Add Photo{% endblock %}
-
-
+{% block title %}Photo {% if isEditing %}edit{% else %}add{% endif %}{% endblock %}
 
 {% block content %}
     {% if errorList %}

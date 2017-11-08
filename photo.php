@@ -1,4 +1,5 @@
 <?php
+
 // fake $app, $log so that Netbeans can provide suggestions while typing code
 if (false) {
     $app = new \Slim\Slim();
@@ -7,23 +8,55 @@ if (false) {
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
-//add photo 
-$app->get('/photo/add', function() use ($app) {
+
+// view list of images 
+$app->get('/photo/list', function() use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $imagesList = DB::query("SELECT * FROM images");
+    $app->render("/photo/photo_list.html.twig", array('list' => $imagesList));
+});
+//add /edit photo 
+$app->get('/photo/:op(/:id)', function($op, $id =-1) use ($app) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
         return;
     }
-    $app->render('/photo/photo_add.html.twig');
-});
-//add images 
-$app->post('/photo/add', function() use ($app , $log) {
+    if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
+        $app->render('not_found.html.twig');
+        return;
+    }
+    if ($id != -1) {
+        $values = DB::queryFirstRow('SELECT * FROM images WHERE id=%i', $id);
+        if (!$values) {
+            $app->render('not_found.html.twig');
+            return;
+        }
+    } else { // nothing to load from database - adding
+        $values = array();
+    }
+    $app->render('/photo/photo_addedit.html.twig', array(
+        'v' => $values,
+        'isEditing' => ($id != -1)));
+})->conditions(array(
+    'op' => '(edit|add)',
+    'id' => '\d+'
+));
+//add / edit images 
+$app->post('/photo/:op(/:id)', function($op, $id =-1) use ($app, $log) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
+        return;
+    }
+    if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
+        $app->render('not_found.html.twig');
         return;
     }
     $imageTitle = $app->request()->post('imageTitle');
     $imagePath = $app->request()->post('imagePath');
-    
+
     //
     $values = array('imageTitle' => $imageTitle, 'imagePath' => $imagePath);
 
@@ -33,7 +66,7 @@ $app->post('/photo/add', function() use ($app , $log) {
         $values['imageTitle'] = '';
         array_push($errorList, "Image Title must be between 2 and 50 characters long");
     }
-   $userImage = array();
+    $userImage = array();
     // is file being uploaded
     if ($_FILES['userImage']['error'] != UPLOAD_ERR_NO_FILE) {
         $userImage = $_FILES['userImage'];
@@ -58,18 +91,19 @@ $app->post('/photo/add', function() use ($app , $log) {
             }
         }
     } else { // no file uploaded
-        
-            array_push($errorList, "Image is required when creating new product");
-        
+          if ($op == 'add') {
+        array_push($errorList, "Image is required when creating new picture");
+          }
     }
 
     //
     if ($errorList) { // 3. failed submission
-        $app->render('/photo/photo_add.html.twig', array(
-            'errorList' => $errorList,
+        $app->render('/photo/photo_addedit.html.twig', array(
+            "errorList" => $errorList,
+            'isEditing' => ($id != -1),
             'v' => $values));
     } else { // 2. successful submission
-      if ($userImage) {
+        if ($userImage) {
             $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $userImage['name']);
             $imagePath = 'uploads/' . $sanitizedFileName;
             if (!move_uploaded_file($userImage['tmp_name'], $imagePath)) {
@@ -79,8 +113,16 @@ $app->post('/photo/add', function() use ($app , $log) {
             }
             // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
             $values['imagePath'] = "/" . $imagePath;
-        DB::insert('images', $values);
-        $app->render('/photo/photo_add_success.html.twig');
-    }}
-});
+            if ($id != -1) {
+                DB::update('images', $values, "id=%i", $id);
+            } else {
+                DB::insert('images', $values);
+            }
+            $app->render('/photo/photo_addedit_success.html.twig', array('isEditing' => ($id != -1)));
+        }
+    }
+})->conditions(array(
+    'op' => '(edit|add)',
+    'id' => '\d+'
+));
 

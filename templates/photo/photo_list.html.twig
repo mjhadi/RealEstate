@@ -1,0 +1,24 @@
+
+{% extends "master.html.twig" %}
+{% block title %}Photo list{% endblock %}
+{% block content %}
+    <p><a href="/news/add">Add photo</a><p>
+    <table border=1>
+        <tr><th>#</th><th>Image Title</th><th>Picture</th><th>action</th></tr>
+        {% for n in list %}
+                <tr class="{% if loop.index is odd %}rowodd{% else %}roweven{% endif %}">
+                    <td>{{n.id}}</td>
+                    <td>{{n.imageTitle}}</td>
+                    <td><img src="{{n.imagePath}}"  width="150"></td>
+                                   
+                    <td>
+                        <a href="/photo/delete/{{n.id}}">Delete</a>
+                        <a href="/photo/edit/{{n.id}}">Edit</a>
+                    </td>
+                </tr>
+        {% else %}
+            <tr><td colspan="6"> You have no images</td></tr>
+        {% endfor %}
+    </table>    
+{% endblock %}
+
