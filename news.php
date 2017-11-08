@@ -17,7 +17,7 @@ $app->get('/news/list', function() use ($app) {
         $app->render("access_denied.html.twig");
         return;
     }
-    $userId = $_SESSION['user']['id'];
+    $userId = $_SESSION['user']['userId'];
     $newsList = DB::query("SELECT * FROM news WHERE userId =%i", $userId);
     $app->render("/news/news_list.html.twig", array('list' => $newsList));
 });
@@ -28,7 +28,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
         $app->render("access_denied.html.twig");
         return;
     }
-    $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d AND userId=%i", $id, $_SESSION['user']['id']);
+    $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d AND userId=%i", $id, $_SESSION['user']['userId']);
     if (!$news) {
         $app->render("/not_found.html.twig");
         return;
@@ -46,7 +46,7 @@ $app->post('/news/delete/:id', function($id) use ($app) {
         $app->render('/not_found.html.twig');
         return;
     }
-    DB::delete('news', "id=%i AND userId=%i", $id, $_SESSION['user']['id']);
+    DB::delete('news', "id=%i AND userId=%i", $id, $_SESSION['user']['userId']);
     if (DB::affectedRows() == 0) {
         $app->render('/not_found.html.twig');
     } else {
@@ -66,7 +66,7 @@ $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
     }
     //
     if ($id != -1) {
-        $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i AND userId=%i', $id, $_SESSION['user']['id']);
+        $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i AND userId=%i', $id, $_SESSION['user']['userId']);
         if (!$values) {
             $app->render('/not_found.html.twig');
             return;
@@ -126,7 +126,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         if ($id != -1) {
             DB::update('news', $values, "id=%i", $id);
         } else {
-            $values['userId'] = $_SESSION['user']['id'];
+            $values['userId'] = $_SESSION['user']['userId'];
             DB::insert('news', $values);
         }
         $app->render('/news/news_addedit_success.html.twig', array('isEditing' => ($id != -1)));
