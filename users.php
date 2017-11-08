@@ -160,7 +160,7 @@ $app->map('/passreset/request', function() use ($app, $log) {
           )); */
         /* Version 2: insertUpdate */
         DB::insertUpdate('passresets', array(
-            'userId' => $user['id'],
+            'userId' => $user['userId'],
             'secretToken' => $secretToken,
             'expiryDateTime' => date("Y-m-d H:i:s", strtotime("+5 minutes"))
         ));
@@ -178,7 +178,7 @@ $app->map('/passreset/request', function() use ($app, $log) {
         // $headers.= sprintf("To: %s\r\n", $user['email']);
 
         mail($toEmail, "Your password reset for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
-        $log->info('Email sent for password reset for user id=' . $user['id']);
+        $log->info('Email sent for password reset for user id=' . $user['userId']);
         $app->render('user/passreset_request_success.html.twig');
     } else { // State 3: failed request, email not registered
         $app->render('user/passreset_request.html.twig', array('error' => true));
@@ -197,9 +197,9 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         return;
     }
     //
-    $user = DB::queryFirstRow("SELECT * FROM users WHERE id=%d", $row['userId']);
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE userId=%d", $row['userId']);
     if (!$user) {
-        $log->err(sprintf("Passreset for token %s user id=%d not found", $row['secretToken'], $row['userId']));
+        $log->err(sprintf("Passreset for token %s user userId=%d not found", $row['secretToken'], $row['userId']));
         $app->render('error_internal.html.twig');
         return;
     }
@@ -230,7 +230,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
                 'email' => $user['email']
             ));
         } else { // 2. successful submission
-            DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
+            DB::update('users', array('password' => $pass1), 'userId=%d', $user['userId']);
             $app->render('user/passreset_form_success.html.twig');
         }
     }
