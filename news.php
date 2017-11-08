@@ -74,7 +74,7 @@ $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
     } else { // nothing to load from database - adding
         $values = array();
     }
-    $app->render('news/news_addedit.html.twig', array(
+    $app->render('/news/news_addedit.html.twig', array(
         'v' => $values,
         'isEditing' => ($id != -1)
     ));
@@ -118,7 +118,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         array_push($errorList, "Date seems invalid. Please enter in this format yyyy-mm-dd."); 
     } 
     if ($errorList) {
-        $app->render("/news/news_add.html.twig", array(
+        $app->render("/news/news_addedit.html.twig", array(
             "errorList" => $errorList,
             'isEditing' => ($id != -1),
             'v' => $values));
@@ -128,7 +128,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         } else {
             DB::insert('news', $values);
         }
-        $app->render('news/news_addedit_success.html.twig', array('isEditing' => ($id != -1)));
+        $app->render('/news/news_addedit_success.html.twig', array('isEditing' => ($id != -1)));
     }
 })->conditions(array(
     'op' => '(edit|add)',
