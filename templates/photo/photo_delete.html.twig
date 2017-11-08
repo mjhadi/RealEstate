@@ -1,0 +1,18 @@
+{% extends "master.html.twig" %}
+{% block title %}Confirm delete{% endblock %}
+{% block content %}
+    <p><br>Are you sure you want to delete this images?</b></p>
+    <form action="/photo/list" style="display:inline;">            
+        <input type="submit" value="Candel">
+    </form>
+    <form method="post" action="/photo/delete/{{images.imageId}}" style="display:inline;">            
+        <input type="hidden" name="confirmed" value="true">
+        <input type="submit" value="Delete">
+    </form>
+    <div>
+        <p>Image Title: {{images.imageTitle}}</p>
+       
+        <img src="{{images.imagePath}}" width="150">        
+    </div>
+{% endblock %}
+
