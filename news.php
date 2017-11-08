@@ -36,7 +36,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
     $app->render("/news/news_delete.html.twig", array('n' => $news));
 });
 
-$app->get('/news/delete/:id', function($id) use ($app) {
+$app->post('/news/delete/:id', function($id) use ($app) {
     if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
