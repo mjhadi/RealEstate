@@ -29,7 +29,7 @@ $app->get('/photo/:op(/:id)', function($op, $id =-1) use ($app) {
         return;
     }
     if ($id != -1) {
-        $values = DB::queryFirstRow('SELECT * FROM images WHERE id=%i', $id);
+        $values = DB::queryFirstRow('SELECT * FROM images WHERE imageId=%i', $id);
         if (!$values) {
             $app->render('not_found.html.twig');
             return;
@@ -114,7 +114,7 @@ $app->post('/photo/:op(/:id)', function($op, $id =-1) use ($app, $log) {
             // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
             $values['imagePath'] = "/" . $imagePath;
             if ($id != -1) {
-                DB::update('images', $values, "id=%i", $id);
+                DB::update('images', $values, "imageId=%i", $id);
             } else {
                 DB::insert('images', $values);
             }
@@ -125,4 +125,34 @@ $app->post('/photo/:op(/:id)', function($op, $id =-1) use ($app, $log) {
     'op' => '(edit|add)',
     'id' => '\d+'
 ));
+// delete images 
+$app->get('/photo/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user'] ) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $images = DB::queryFirstRow("SELECT * FROM images WHERE imageId=%d", $id);
+    if (!$images) {
+        $app->render("not_found.html.twig");
+        return;
+    }
+    $app->render("/photo/photo_delete.html.twig", array('images' => $images));
+});
 
+$app->get('/photo/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user'] ) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $confirmed = $app->request()->post('confirmed');
+    if ($confirmed != 'true') {
+        $app->render('/news/not_found.html.twig');
+        return;
+    }
+    DB::delete('news', "id=%i", $id);
+    if (DB::affectedRows() == 0) {
+        $app->render('not_found.html.twig');
+    } else {
+        $app->render('/photo/photo_delete_success.html.twig');
+    }
+});
