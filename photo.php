@@ -9,18 +9,18 @@ if (!isset($_SESSION['user'])) {
 }
 //add photo 
 $app->get('/photo/add', function() use ($app) {
-//    if (!$_SESSION['user']) {
-//        $app->render('access_denied.html.twig');
-//        return;
-//    }
+    if (!$_SESSION['user']) {
+        $app->render('access_denied.html.twig');
+        return;
+    }
     $app->render('/photo/photo_add.html.twig');
 });
 //add images 
 $app->post('/photo/add', function() use ($app , $log) {
-//    if (!$_SESSION['user']) {
-//        $app->render('access_denied.html.twig');
-//        return;
-//    }
+    if (!$_SESSION['user']) {
+        $app->render('access_denied.html.twig');
+        return;
+    }
     $imageTitle = $app->request()->post('imageTitle');
     $imagePath = $app->request()->post('imagePath');
     
