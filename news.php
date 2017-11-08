@@ -27,7 +27,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
         $app->render("access_denied.html.twig");
         return;
     }
-    $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d", $id);
+    $news = DB::queryFirstRow("SELECT * FROM news WHERE id=%d AND userId=%i", $id, $_SESSION['user']['id']);
     if (!$news) {
         $app->render("/news/not_found.html.twig");
         return;
@@ -45,7 +45,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
         $app->render('/news/not_found.html.twig');
         return;
     }
-    DB::delete('news', "id=%i", $id);
+    DB::delete('news', "id=%i AND userId=%i", $id, $_SESSION['user']['id']);
     if (DB::affectedRows() == 0) {
         $app->render('/news/not_found.html.twig');
     } else {
@@ -65,7 +65,7 @@ $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
     }
     //
     if ($id != -1) {
-        $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i', $id);
+        $values = DB::queryFirstRow('SELECT * FROM news WHERE id=%i AND userId=%i', $id, $_SESSION['user']['id']);
         if (!$values) {
             $app->render('/news/not_found.html.twig');
             return;
@@ -125,6 +125,7 @@ $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         if ($id != -1) {
             DB::update('news', $values, "id=%i", $id);
         } else {
+            $values['userId'] = $_SESSION['user']['id'];
             DB::insert('news', $values);
         }
         $app->render('/news/news_addedit_success.html.twig', array('isEditing' => ($id != -1)));
