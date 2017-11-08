@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 
 // veiw of list of news 
 $app->get('/news/list', function() use ($app) {
-    if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -23,7 +23,7 @@ $app->get('/news/list', function() use ($app) {
 
 // Delete News 
 $app->get('/news/delete/:id', function($id) use ($app) {
-    if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -36,7 +36,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
 });
 
 $app->get('/news/delete/:id', function($id) use ($app) {
-    if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -56,7 +56,7 @@ $app->get('/news/delete/:id', function($id) use ($app) {
 // Add-Edit News
 // check if the user logged in
 $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
-    if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render('access_denied.html.twig');
         return;
     }
@@ -84,7 +84,7 @@ $app->get('/news/:op(/:id)', function($op, $id = -1) use ($app) {
 ));
 
 $app->post('/news/:op(/:id)', function($op, $id = -1) use ($app, $log) {
-    if (!$_SESSION['user'] || $_SESSION['user']['role'] != 'admin') {
+    if (!$_SESSION['user'] || $_SESSION['user']['userRole'] != 'admin') {
         $app->render('access_denied.html.twig');
         return;
     }
