@@ -69,9 +69,18 @@ $app->post('/photo/add', function() use ($app , $log) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-      
+      if ($userImage) {
+            $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $userImage['name']);
+            $imagePath = 'uploads/' . $sanitizedFileName;
+            if (!move_uploaded_file($userImage['tmp_name'], $imagePath)) {
+                $log->err("Error moving uploaded file: " . print_r($userImage, true));
+                $app->render('internal_error.html.twig');
+                return;
+            }
+            // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
+            $values['imagePath'] = "/" . $imagePath;
         DB::insert('images', $values);
         $app->render('/photo/photo_add_success.html.twig');
-    }
+    }}
 });
 
