@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{#{% extends "master.html.twig" %}#}
 {% block title %}Property list{% endblock %}
 {% block content %}
     <p><a href="/property/add">Add Property</a><p>
@@ -19,6 +19,7 @@
                     <td>
                         <a href="/property/delete/{{p.propertyId}}">Delete</a>
                         <a href="/property/edit/{{p.propertyId}}">Edit</a>
+                         <a href="/property/googlemap/{{p.propertyId}}">Go Goole maps</a>
                     </td>
                 </tr>
         {% else %}

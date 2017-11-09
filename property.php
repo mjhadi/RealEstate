@@ -196,8 +196,17 @@ $app->post('/property/delete/:id', function($id) use ($app) {
 });
 // google maps
 
-$app->get('/property/googlemap/', function() use ($app) {
-   
-    $app->render("/property/googlemap.html.twig");
+$app->get('/property/googlemap/:id', function($id) use ($app) {
+   if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $property = DB::queryFirstRow("SELECT * FROM property WHERE propertyId=%d AND userId=%i", $id, $_SESSION['user']['userId']);
+    if (!$property) {
+        $app->render("/not_found.html.twig");
+        return;
+    }
+    $app->render("/property/google_maps.html.twig", array('property'=>$property));
 });
+
 
