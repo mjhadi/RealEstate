@@ -3,5 +3,111 @@
 {% block title %}User registration successful{% endblock %}
 
 {% block content %}
-<p>Registration successful. You may now <a href="/user/login">login</a>.</p>
-{% endblock content %}
+
+    <!-- Body content -->
+
+    <div class="header-connect">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-8  col-xs-12">
+                    <div class="header-half header-call">
+                        <p>
+                            <span><i class="pe-7s-call"></i> 514 296 0249</span>
+                            <span><i class="pe-7s-mail"></i> realestate@company.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
+                    <div class="header-half header-social">
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vine"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>            
+    <!--End top header -->
+
+
+    <nav class="navbar navbar-default ">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="assets/img/logo.png" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse yamm" id="navigation">
+                <div class="button navbar-right">
+                    <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('/user/login')" data-wow-delay="0.4s">Login</button>
+                    <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('/user/register')" data-wow-delay="0.5s">Register</button>
+                </div>
+                <ul class="main-nav nav navbar-nav navbar-right">
+                    <li class="dropdown ymm-sw " data-wow-delay="0.1s">
+                        <a href="/" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+
+                    </li>
+
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="properties.html">Properties</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li>
+
+
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!-- End of nav bar -->
+
+    <div class="page-head"> 
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Home New account / Sign in </h1>               
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="register-area" style="background-color: rgb(249, 249, 249);">
+        <div class="container">
+            <p>Registration successful. You may now <a href="/user/login">login</a>.</p>
+
+        </div>
+    </div>
+
+   
+
+                {% endblock content %}
+                {% block footerExtra %}
+                    <script src="/assets/js/modernizr-2.6.2.min.js"></script>
+
+                    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+                    <script src="/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="/assets/js/bootstrap-select.min.js"></script>
+                    <script src="/assets/js/bootstrap-hover-dropdown.js"></script>
+
+                    <script src="/assets/js/easypiechart.min.js"></script>
+                    <script src="/assets/js/jquery.easypiechart.min.js"></script>
+
+                    <script src="/assets/js/owl.carousel.min.js"></script>   
+                    <script src="/assets/js/wow.js"></script>
+
+                    <script src="/assets/js/icheck.min.js"></script>
+                    <script src="/assets/js/price-range.js"></script>
+
+                    <script src="/assets/js/main.js"></script>
+
+
+                {% endblock %}
