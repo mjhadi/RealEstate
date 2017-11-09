@@ -110,7 +110,7 @@
                                     {% endfor %}
                             </ul>
                         {% endif %}
-                        <form action="" method="post">
+                        <form enctype="multipart/form-data" method="post">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" value="{{v.name}}" class="form-control" id="name">
@@ -131,6 +131,11 @@
                                     <option value="Seller">Seller</option>
 
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-images">Chose Images :</label>
+                                <input name="memberImage" class="form-control" type="file" id="property-images">
+                                <p class="help-block">Select your image .</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>

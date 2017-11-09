@@ -47,7 +47,7 @@ $app->get('/user/register', function() use ($app) {
     $app->render('/user/register_user.html.twig');
 });
 
-$app->post('/user/register', function() use ($app) {
+$app->post('/user/register', function() use ($app, $log) {
     $name = $app->request()->post('name');
     $email = $app->request()->post('email');
     $address = $app->request()->post('address');
@@ -57,7 +57,7 @@ $app->post('/user/register', function() use ($app) {
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
     //
-    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone);
+    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'pathImage' =>$pathImage);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
@@ -86,35 +86,36 @@ $app->post('/user/register', function() use ($app) {
         }
     }
     //image of user
-    $userImage = array();
+     $memberImage = array();
     // is file being uploaded
-//    if ($_FILES['userImage']['error'] != UPLOAD_ERR_NO_FILE) {
-//        $userImage = $_FILES['userImage'];
-//        if ($userImage['error'] != 0) {
-//            array_push($errorList, "Error uploading file");
-//            $log->err("Error uploading file: " . print_r($userImage, true));
-//        } else {
-//            if (strstr($userImage['name'], '..')) {
-//                array_push($errorList, "Invalid file name");
-//                $log->warn("Uploaded file name with .. in it (possible attack): " . print_r($userImage, true));
-//            }
-//            // TODO: check if file already exists, check maximum size of the file, dimensions of the image etc.
-//            $info = getimagesize($userImage["tmp_name"]);
-//            if ($info == FALSE) {
-//                array_push($errorList, "File doesn't look like a valid image");
-//            } else {
-//                if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/gif' || $info['mime'] == 'image/png') {
-//                    // image type is valid - all good
-//                } else {
-//                    array_push($errorList, "Image must be a JPG, GIF, or PNG only.");
-//                }
-//            }
-//        }
-//    } else { // no file uploaded
-//        
-//            array_push($errorList, "Image is required when creating new product");
-//        
-//    }
+    if ($_FILES['memberImage']['error'] != UPLOAD_ERR_NO_FILE) {
+        $memberImage = $_FILES['memberImage'];
+        if ($memberImage['error'] != 0) {
+            array_push($errorList, "Error uploading file");
+            $log->err("Error uploading file: " . print_r($memberImage, true));
+        } else {
+            if (strstr($memberImage['name'], '..')) {
+                array_push($errorList, "Invalid file name");
+                $log->warn("Uploaded file name with .. in it (possible attack): " . print_r($memberImage, true));
+            }
+            // TODO: check if file already exists, check maximum size of the file, dimensions of the image etc.
+            $info = getimagesize($memberImage["tmp_name"]);
+            if ($info == FALSE) {
+                array_push($errorList, "File doesn't look like a valid image");
+            } else {
+                if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/gif' || $info['mime'] == 'image/png') {
+                    // image type is valid - all good
+                } else {
+                    array_push($errorList, "Image must be a JPG, GIF, or PNG only.");
+                }
+            }
+        }
+    } else { // no file uploaded
+      
+            array_push($errorList, "Image is required when creating new product");
+        
+    }
+
 
     //
     if ($errorList) { // 3. failed submission
@@ -122,6 +123,17 @@ $app->post('/user/register', function() use ($app) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
+          if ($memberImage) {
+            $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $memberImage['name']);
+            $imagePath = 'uploads/' . $sanitizedFileName;
+            if (!move_uploaded_file($memberImage['tmp_name'], $imagePath)) {
+                $log->err("Error moving uploaded file: " . print_r($memberImage, true));
+                $app->render('internal_error.html.twig');
+                return;
+            }
+            // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
+            $values['pathImage'] = "/" . $imagePath;
+        }
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
         DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc, 'pathImage'=>$pathImage));
         $app->render('/user/register_user_success.html.twig');
@@ -235,3 +247,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         }
     }
 })->via('GET', 'POST');
+// user profile
+$app->get('/user/profile', function() use ($app) {
+    $app->render('/user/profile_user.html.twig');
+});

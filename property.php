@@ -65,7 +65,7 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
         $values['latitude'] = "";
     }
     //validate Longitude
-    if ($longitude == '' || $longitude < -180 || $longitude > 180) {
+    if ($longitude == '' || $longitude < -180.0000 || $longitude > 180.0000) {
         array_push($errorList, "Longitude must be between -180 and 180.");
         $values['longitude'] = "";
     }
@@ -91,52 +91,11 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
     }
     //validate image
      $propertyImage = array();
-    // is file being uploaded
-//    if ($_FILES['propertyImage']['error'] != UPLOAD_ERR_NO_FILE) {
-//        $propertyImage = $_FILES['propertyImage'];
-//        if ($propertyImage['error'] != 0) {
-//            array_push($errorList, "Error uploading file");
-//            $log->err("Error uploading file: " . print_r($propertyImage, true));
-//        } else {
-//            if (strstr($propertyImage['name'], '..')) {
-//                array_push($errorList, "Invalid file name");
-//                $log->warn("Uploaded file name with .. in it (possible attack): " . print_r($propertyImage, true));
-//            }
-//            // TODO: check if file already exists, check maximum size of the file, dimensions of the image etc.
-//            $info = getimagesize($propertyImage["tmp_name"]);
-//            if ($info == FALSE) {
-//                array_push($errorList, "File doesn't look like a valid image");
-//            } else {
-//                if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/gif' || $info['mime'] == 'image/png') {
-//                    // image type is valid - all good
-//                } else {
-//                    array_push($errorList, "Image must be a JPG, GIF, or PNG only.");
-//                }
-//            }
-//        }
-//    } else { // no file uploaded
-//        if ($op == 'add') {
-//            array_push($errorList, "Image is required when creating new product");
-//        }
-//    }
+   
     //
+    
     if ($errorList) { // 3. failed submission
-//        if ($propertyImage) {
-//            $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $propertyImage['name']);
-//            $imagePath = 'uploads/' . $sanitizedFileName;
-//            if (!move_uploaded_file($propertyImage['tmp_name'], $imagePath)) {
-//                $log->err("Error moving uploaded file: " . print_r($propertyImage, true));
-//                $app->render('internal_error.html.twig');
-//                return;
-//            }
-//            // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
-//            $values['imageId'] = "/" . $imagePath;
-//        }
-//        
-        $app->render('/property/property_addedit.html.twig',  array(
-            'errorList' => $errorList,
-            'isEditing' => ($id != -1),
-            'v' => $values));
+        
     } else { // 2. successful submission
         $values['userId'] = $_SESSION['user']['userId'];
         if ($id != -1) {
