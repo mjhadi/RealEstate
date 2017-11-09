@@ -2,59 +2,91 @@
 
 {% block title %}Login{% endblock %}
 {% block headextra %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-rtl.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
 
 {%endblock %}
 {% block content %}
-<body>
 
-{% if error %}
-    <p>Login invalid. Try again or <a href="/user/register">register</a>.</p>
-{% endif %}
 
-	<div id="modal-login" class="modal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header text-center">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h2>Sign in to your account:</h2>
-					<span>Welcome to the home!</span>
-				</div>
-				<form method="post">>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="email" name="email" placeholder="Email:" required>
-							<span class="fa fa-at"></span>
-						</div>				
-						<div class="form-group">
-							<input type="password" name="pass" placeholder="Password:" required>
-							<span class="fa fa-lock"></span>
-						</div>
-						<div class="form-group social-login clearfix">
-							<a href="https://www.facebook.com" class="col-md-6 fb-login" target="blank"><span class="fa fa-facebook-square"></span>Facebook login</a>
-							<a href="https://plus.google.com" class="col-md-6 google-login" target="blank"><span class="fa fa-google-plus-square"></span>Google login</a>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="form-group clearfix">
-							<span>Don't have an account? <a href="/user/register">Sign Up</a></span>
-							<span>Forgot your password? <a href="#">Restore</a></span>
-							<button type="submit" class="btn btn-primary">Login</button>					
-						</div>
-					</div>		
-				</form>
-			</div>
-		</div>
-	</div>
-</body>
+
+    <body class="hold-transition login-page">
+        {% if error %}
+            <p>Login invalid. Try again or <a href="/user/register">register</a>.</p>
+        {% endif %}
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="../../index2.html"><b>Real</b>Estate</a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form  method="post">
+                    <div class="form-group has-feedback">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" name="pass" class="form-control" placeholder="Password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+                        Facebook</a>
+                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+                        Google+</a>
+                </div>
+                <!-- /.social-auth-links -->
+
+                <a href="#">I forgot my password</a><br>
+                <a href="/user/register" class="text-center">Register a new membership</a>
+
+            </div>
+            <!-- /.login-box-body -->
+        </div>
+        <!-- /.login-box -->
+
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- iCheck -->
+        <script src="../../plugins/iCheck/icheck.min.js"></script>
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+            });
+        </script>
+    </body>
 
 {% endblock content %}

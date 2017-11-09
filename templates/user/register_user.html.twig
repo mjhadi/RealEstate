@@ -2,20 +2,17 @@
 
 {% block title %}Register{% endblock %}
 {% block headextra %}
-   {% block headextra %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-rtl.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <script>
         $(document).ready(function () {
             // respond to all events that may change the value of input
@@ -29,65 +26,104 @@
 {% endblock %}
 
 {% block content %}
-    <body>
-    {% if errorList %}
-        <ul>
-            {% for error in errorList %}
-                <li>{{error}}</li>
-                {% endfor %}
-        </ul>
-    {% endif %}
-    
-    <div id="modal-register" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2>Create an Account</h2>
-                    <span>It takes few minutes</span>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input  type="text" name="name" value="{{v.name}}" placeholder="Name:" required>					
-                        </div>		
-                        <div class="form-group">
-                            <input type="text" name="address" value="{{v.address}}" placeholder="Address:" required>					
-                        </div>
-                        <input type="text" name="phone" value="{{v.phone}}" placeholder="Phone:" required>					
+
+
+    <body class="hold-transition register-page">
+        {% if errorList %}
+            <ul>
+                {% for error in errorList %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="register-box">
+            <div class="register-logo">
+                <a href="../../index2.html"><b>Admin</b>LTE</a>
+            </div>
+
+            <div class="register-box-body">
+                <p class="login-box-msg">Register a new membership</p>
+
+                <form  method="post">
+                    <div class="form-group has-feedback">
+                        <input type="text" name="name" value="{{v.name}}" class="form-control" placeholder="Name">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    <div class="form-group">
-                        <select name="userRole">
-                            <option value="Admin">Admin</option>
+                    <div class="form-group has-feedback">
+                        <input  type="text" name="address" value="{{v.address}}" class="form-control" placeholder="Address">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input  type="text" name="phone" value="{{v.phone}}" class="form-control" placeholder="Phone">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="email" name="email" class="form-control" placeholder="Email"><span id="isTaken"></span>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <select name="userRole" class="form-control select2" style="width: 100%;">
+                          
+                            <option value="Admin" selected="selected">Admin</option>
                             <option value="Buyer">Buyer</option>
                             <option value="Seller">Seller</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                       <input type="email" name="email" value="{{v.email}}" placeholder="Email:" required><span id="isTaken"></span>
+                    <div class="form-group has-feedback">
+                        <input type="password" name="pass1" class="form-control" placeholder="Password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="pass1" placeholder="Password:" required>
+                    <div class="form-group has-feedback">
+                        <input type="password"  name="pass2" class="form-control" placeholder="Retype password">
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
-                    <div class="form-group">
-                       <input type="password" name="pass2" placeholder="RePassword:" required>
+                    <div class="form-group has-feedback">
+                        <input type="file" name="userImage" >
                     </div>
-                     <div class="form-group">
-                       <input type="file" name="userImage" >
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                        </div>
+                        <!-- /.col -->
                     </div>
-            </div>
-            <div class="modal-footer">
-                <div class="form-group clearfix">					
-                    <span>Do u have an account? <a href="#">Sign In</a></span>					
-                    <button type="submit" class="btn btn-primary">Join</button>		
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
+                        Facebook</a>
+                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+                        Google+</a>
                 </div>
-                <div>
-                    <span class="terms">By clicking JOIN button you agree with our <br> <a href="terms_and_conditions.html" target="blank">Terms and conditions</a></span>
-                </div>
+
+                <a href="login.html" class="text-center">I already have a membership</a>
             </div>
-            </form>
+            <!-- /.form-box -->
         </div>
-    </div>
-</div>
-</body>
+        <!-- /.register-box -->
+
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- iCheck -->
+        <script src="../../plugins/iCheck/icheck.min.js"></script>
+        <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+        </script>
+    </body>
 {% endblock %}

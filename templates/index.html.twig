@@ -2,639 +2,668 @@
 
 {% block title %}Home page{% endblock %}
 {% block headextra %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-rtl.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="bower_components/morris.js/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 {%endblock %}
 {% block content %}  
-<body class="page-homepage" id="page-top">
-	<!-- Preloader -->
-	<div id="page-preloader">
-		<div class="loader-ring"></div>
-		<div class="loader-ring2"></div>
-	</div>
-	<!-- End Preloader -->
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-	<!-- Wrapper -->
-	<div class="wrapper ">
-    <!-- Start Header -->
-    <div id="header" class="home-3">
-        <div class="navigation">
-            <header class="navbar" id="top">  
-                <div class="container">
-                    <div class="navbar-brand nav">
-                        <a class="navbar-brand nav logo" href="index_v_1.html" title="" rel="home">
-                            <object class="master-logo" type="image/svg+xml"></object>
-                        </a>
-                        <a class="navbar-brand nav logo retina" href="index_v_1.html" title="" rel="home">
-                            <object class="master-logo" type="image/svg+xml"></object> 
-                        </a>
-                    </div>
-                    <nav class="secondary main-menu">
-                        <a href="#" data-toggle="dropdown" class="pull-right drop-left">More
-                            <div class="gamb-button"> 
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </div>
-                        </a>				
-                        <ul class="nav navbar-nav dropdown-menu pull-right slide-left">
-                            <li ><a href="#">Homepage</a>
-                               
-                            </li>
-                            <li class="has-child"><a href="#">Agents&nbsp;&amp;&nbsp;agencies</a>
-                                <ul class="child-navigation">
-                                    <li><a href="agency_profile.html">Agency Profile</a></li>
-                                    <li><a href="agent_profile.html">Agents Profile</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-child"><a href="#">All Properties</a>
-                                <ul class="child-navigation">
-                                    <li><a href="our_property.html">For Rent</a></li>
-                                    <li><a href="our_property_list_type.html">For Sell</a></li>
-                                    <li><a href="add_property.html">Add Property</a></li>
-                                    <li><a href="property_page.html">Property Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-child"><a href="#">Pages</a>
-                                <ul class="child-navigation">
-                                    <li><a href="404_page.html">404 Page</a></li>
-                                    <li><a href="pricing_page.html">Pricing Page</a></li>
-                                    <li><a href="compare_page.html">Compare Page</a></li>
-                                    <li><a href="shotcodes.html">Shortcodes</a></li>
-                                    <li><a href="search_result.html">Search</a></li>
-                                    <li><a href="user_profile_(horizontal).html">user profile (horizontal)</a></li>
-                                    <li><a href="user_profile_(vertical).html">user profile (vertical)</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-child"><a href="#">Blog</a>
-                                <ul class="child-navigation">
-                                    <li><a href="blog_list.html">Blog List</a></li>
-                                    <li><a href="blog_list_fullwidth.html">Blog List Fullwidth</a></li>
-                                    <li><a href="blog_article.html">Blog Article</a></li>
-                                    <li><a href="blog_text_article.html">Blog Text Article</a></li>
-                                    <li><a href="blog_article_styles.html">Blog Article Styles</a></li>
-                                    <li><a href="blog_video.html">Blog Video</a></li>
-                                </ul>
-                            </li>                        
-                            <li><a href="about_us.html">About Us</a></li>
-                            <li><a href="contact_us.html">Contact us</a></li>
-                            <li>
-                                <a href="#" data-toggle="dropdown" class="pull-right drop-close">Close
-                                    <span class="cross"></span>
-                                </a>
-                            </li>
-                        </ul>				
-                    </nav><!-- /.navbar collapse-->
-                    <nav class="primary start main-menu">
-                        <ul class="nav navbar-nav pull-right">
-                            <li><a href="add_property.html">Add Property</a></li>
-                           
-                            <li><a href="/user/login"  >Log in<i class="fa fa-arrow-right"></i></a></li>	
-                            <li><a href="/user/register" >Registration</a></li>		
-                        </ul>
-                    </nav>
-                </div>
-                <div class="site-header">
-                    <a href="#" data-toggle="dropdown" class="pull-right drop-left">Menu
-                        <div class="gamb-button"> 
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </div>
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="../../index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b>LTE</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 4 messages</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
                     </a>
-                    <div class="navbar-brand nav">
-                        <a class="navbar-brand nav logo" href="index_v_1.html" title="" rel="home">
-                            <object class="master-logo" type="image/svg+xml"></object> 
-                        </a>
-                        <a class="navbar-brand nav logo retina" href="index_v_1.html" title="" rel="home">
-                            <object class="master-logo" type="image/svg+xml"></object> 
-                        </a>
-                    </div>
-                    <div class="mob-menu drop-close hidden">
-                        <a href="#" data-toggle="dropdown" class="pull-right drop-close hidden black-cross">Close
-                            <span class="cross"></span>
-                        </a>
-                        <nav class="secondary">					
-                            <ul class="nav navbar-nav">
-                                <li><a href="/user/login" >Log in<i class="fa fa-arrow-right"></i></a></li>	
-                                <li><a href="/user/register">Registration</a></li>
-                                <li ><a href="#">Homepage</a>
-                                    
-                                </li>
-                                <li class="has-child"><a href="#">Agents&nbsp;&amp;&nbsp;agencies</a>
-                                    <ul class="child-navigation">
-                                        <li><a href="agency_profile.html">Agency Profile</a></li>
-                                        <li><a href="agent_profile.html">Agents Profile</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-child"><a href="#">All Properties</a>
-                                    <ul class="child-navigation">
-                                        <li><a href="our_property.html">Our Property</a></li>
-                                        <li><a href="our_property_list_type.html">Our Property List</a></li>
-                                        <li><a href="add_property.html">Add Property</a></li>
-                                        <li><a href="property_page.html">Property Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-child"><a href="#">Pages</a>
-                                    <ul class="child-navigation">
-                                        <li><a href="404_page.html">404 Page</a></li>
-                                        <li><a href="pricing_page.html">Pricing Page</a></li>
-                                        <li><a href="compare_page.html">Compare Page</a></li>
-                                        <li><a href="shotcodes.html">Shortcodes</a></li>
-                                        <li><a href="search_result.html">Search</a></li>
-                                        <li><a href="user_profile_(horizontal).html">user profile (horizontal)</a></li>
-                                        <li><a href="user_profile_(vertical).html">user profile (vertical)</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-child"><a href="#">Blog</a>
-                                    <ul class="child-navigation">
-                                        <li><a href="blog_list.html">Blog List</a></li>
-                                        <li><a href="blog_list_fullwidth.html">Blog List Fullwidth</a></li>
-                                        <li><a href="blog_article.html">Blog Article</a></li>
-                                        <li><a href="blog_text_article.html">Blog Text Article</a></li>
-                                        <li><a href="blog_article_styles.html">Blog Article Styles</a></li>
-                                        <li><a href="blog_video.html">Blog Video</a></li>
-                                    </ul>
-                                </li>                        
-                                <li><a href="about_us.html">About Us</a></li>
-                                <li><a href="contact_us.html">Contact us</a></li>
-                               
-                            </ul>				
-                        </nav><!-- /.navbar collapse-->
-                    </div>
-                </div>
-            </header><!-- /.navbar -->
-        </div>
-    </div>
-    <!-- End Header -->
+                  </li>
+                  <!-- end message -->
+                </ul>
+              </li>
+              <li class="footer"><a href="#">See All Messages</a></li>
+            </ul>
+          </li>
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 9 tasks</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Design some buttons
+                        <small class="pull-right">20%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="#">View all tasks</a>
+              </li>
+            </ul>
+          </li>
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">Alexander Pierce</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-    <!-- Map -->
-    <div id="map"></div>
-    <!-- end Map -->
-
-    <!-- Search Box -->
-    <div class="search-box-wrapper">
-        <div class="search-box-inner">
-            <div class="container">
+                <p>
+                  Alexander Pierce - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
                 <div class="row">
-                    <div class="search-box map">
-                        <div class="search-title">
-                            <h2>Search A Property</h2>
-                            <h6 class="team-color">It takes few minutes</h6>
-                        </div>
-                        <form id="form-map" class="form-map form-search" action="search_result.html">
-                            <p class="search-text col-xs-3">Location:</p>
-                            <!-- <input type="text" class="" id="search-box-property-id" name="q" value=""> -->
-                            <input type="text" class="form-control col-xs-6" id="address-map" name="q" placeholder="">
-                            <span><i class="fa fa-search"></i></span>
-                            <hr>
-                            <p class="search-text-2 col-xs-3">Type:</p>
-                            <select name="type" class="col-xs-9">
-                                <option value="">For Sale</option>
-                                <option value="1">For Rent</option>
-                            </select>
-                            <hr>
-                            <button type="submit" class="btn btn-large btn-primary">Find</button>
-                        </form><!-- /#form-map -->
-                    </div><!-- /.search-box.map -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.search-box-inner -->
-    </div>
-    <!-- end Search Box -->
-    <!-- Page Content -->
-    <div id="page-content_home">
-        <div class="container">
-            <div class="explore">
-                <h2>Explore Properties in Your Area</h2>
-                <h5><i class="fa fa-map-marker"></i>Warsaw, Poland <span class="team-color">Change location</span></h5>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <a href="search_result.html" class="exp-img" style="background:url(http://placehold.it/360X240) center;background-size: cover;">
-                        <span class="filter"></span>
-                        <div class="img-info">
-                            <h3>Studio Apartment’s</h3>
-                            <h6>33 Properties</h6>
-                            <span class="ffs-bs btn btn-small btn-primary">explore more</span>
-                        </div>
-                    </a>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="search_result.html" class="exp-img" style="background:url(http://placehold.it/360X240) center;background-size: cover;">
-                        <span class="filter"></span>
-                        <div class="img-info">
-                            <h3>1+ Bedroom Apt</h3>
-                            <h6>33 Properties</h6>
-                            <span class="ffs-bs btn btn-small btn-primary">explore more</span>
-                        </div>
-                    </a>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="search_result.html" class="exp-img" style="background:url(http://placehold.it/360X240) center;background-size: cover;">
-                        <span class="filter"></span>
-                        <div class="img-info">
-                            <h3>Cozy Houses</h3>
-                            <h6>33 Properties</h6>
-                            <span class="ffs-bs btn btn-small btn-primary">explore more</span>
-                        </div>
-                    </a>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="search_result.html" class="exp-img" style="background:url(http://placehold.it/360X240) center;background-size: cover;">
-                        <span class="filter"></span>
-                        <div class="img-info">
-                            <h3>Luxury House</h3>
-                            <h6>33 Properties</h6>
-                            <span class="ffs-bs btn btn-small btn-primary">explore more</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-8">
-                    <a href="search_result.html" class="exp-img" style="background:url(http://placehold.it/750X240) center;background-size: cover;">
-                        <span class="filter"></span>
-                        <div class="img-info">
-                            <h3>With Swimming Pool</h3>
-                            <h6>33 Properties</h6>
-                            <span class="ffs-bs btn btn-small btn-primary">explore more</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- end container -->
-        <div class="wide-1">
-            <div class="container rel-img">
-                <div class="col-md-8 col-sm-8 ab-us">
-                    <h2>We are Suburb Real Estate Agency</h2>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ex-block">
-                            <h4><i class="fa fa-circle-o"></i>Wide Range of Properties</h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 ex-block">
-                            <h4><i class="fa fa-circle-o"></i>About us</h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry five centuries, but also the leap.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ex-block">
-                            <h4><i class="fa fa-circle-o"></i>14 Agents for Your Service</h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 ex-block">
-                            <h4>&nbsp;</h4>
-                            <p>Typesetting, remaining essentially unchanged. It was popularised in the 1960s.</p>
-                        </div>
-                    </div>
-                    <span class="ffs-bs"><a href="property_page.html" class="btn btn-large">explore property</a></span>
-                </div>
-            </div>
-            <div class="ab-us-img col-md-4 col-sm-4"></div>
-        </div>
-        <!-- end wide-1 -->
-        <div class="wide-2">
-            <div class="container">
-                <div class="explore">
-                    <h2>Our New Exclusive Homes</h2>
-                    <h5 class="team-color">Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>Lorem Ipsum has been the industry's standard dummy text ever since</h5>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-6 prop">
-                        <div class="wht-cont">
-                            <div class="exp-img-2" style="background:url(http://placehold.it/255X200) center;background-size: cover;">
-                                <span class="filter"></span>
-                                <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                                <div class="overlay">
-                                    <div class="img-counter">23 Photo</div>
-                                </div>
-                            </div>
-                            <div class="item-title">
-                                <h4><a href="property_page.html">AVA High Line 89 - 916 Apartments</a></h4>
-                                <p class="team-color">525 W 28th St, New York, NY 10001</p>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <p>Studio - 2 bd</p>
-                                </div>
-                                <div class="col-md-5 col-sm-5 col-xs-5">
-                                    <p>86 m<span class="rank">2</span></p>
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
-                                <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
-                            </div>
-                            <hr>
-                            <div class="item-title btm-part">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p>$5,000,000</p>
-                                        <p class="team-color">FOR SALE</p>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                                        <div class="bookmark" data-bookmark-state="empty">
-                                            <span class="title-add">Add to bookmark</span>
-                                        </div>
-                                        <div class="compare" data-compare-state="empty">
-                                            <span class="plus-add">Add to compare</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 prop">
-                        <div class="wht-cont">
-                            <div class="exp-img-2" style="background:url(http://placehold.it/255X200) center;background-size: cover;">
-                                <span class="filter"></span>
-                                <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                                <div class="overlay">
-                                    <div class="img-counter">23 Photo</div>
-                                </div>
-                            </div>
-                            <div class="item-title">
-                                <h4><a href="property_page.html">Prism at Park Avenue South Apar</a></h4>
-                                <p class="team-color">525 W 28th St, New York, NY 10001</p>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <p>Studio - 2 bd</p>
-                                </div>
-                                <div class="col-md-5 col-sm-5 col-xs-5">
-                                    <p>86 m<span class="rank">2</span></p>
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
-                                <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
-                            </div>
-                            <hr>
-                            <div class="item-title btm-part">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p>$5,000,000</p>
-                                        <p class="team-color">FOR SALE</p>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                                        <div class="bookmark" data-bookmark-state="empty">
-                                            <span class="title-add">Add to bookmark</span>
-                                        </div>
-                                        <div class="compare" data-compare-state="empty">
-                                            <span class="plus-add">Add to compare</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 prop">
-                        <div class="wht-cont">
-                            <div class="exp-img-2" style="background:url(http://placehold.it/255X200) center;background-size: cover;">
-                                <span class="filter"></span>
-                                <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                                <div class="overlay">
-                                    <div class="img-counter">23 Photo</div>
-                                </div>
-                            </div>
-                            <div class="item-title">
-                                <h4><a href="property_page.html">Avalon Morningside Park Apartment</a></h4>
-                                <p class="team-color">525 W 28th St, New York, NY 10001</p>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <p>Studio - 2 bd</p>
-                                </div>
-                                <div class="col-md-5 col-sm-5 col-xs-5">
-                                    <p>86 m<span class="rank">2</span></p>
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
-                                <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
-                            </div>
-                            <hr>
-                            <div class="item-title btm-part">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p>$5,000,000</p>
-                                        <p class="team-color">FOR SALE</p>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                                        <div class="bookmark" data-bookmark-state="empty">
-                                            <span class="title-add">Add to bookmark</span>
-                                        </div>
-                                        <div class="compare" data-compare-state="empty">
-                                            <span class="plus-add">Add to compare</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 prop">
-                        <div class="wht-cont">
-                            <div class="exp-img-2" style="background:url(http://placehold.it/255X200) center;background-size: cover;">
-                                <span class="filter"></span>
-                                <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                                <div class="overlay">
-                                    <div class="img-counter">23 Photo</div>
-                                </div>
-                            </div>
-                            <div class="item-title">
-                                <h4><a href="property_page.html">Prism at Park Avenue South Apar</a></h4>
-                                <p class="team-color">525 W 28th St, New York, NY 10001</p>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <p>Studio - 2 bd</p>
-                                </div>
-                                <div class="col-md-5 col-sm-5 col-xs-5">
-                                    <p>86 m<span class="rank">2</span></p>
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
-                                <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
-                            </div>
-                            <hr>
-                            <div class="item-title btm-part">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p>$5,000,000</p>
-                                        <p class="team-color">FOR SALE</p>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                                        <div class="bookmark" data-bookmark-state="empty">
-                                            <span class="title-add">Add to bookmark</span>
-                                        </div>
-                                        <div class="compare" data-compare-state="empty">
-                                            <span class="plus-add">Add to compare</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <span class="ffs-bs bottom"><a href="property_page.html" class="btn btn-default btn-large">explore property</a></span>
-        </div>
-        <!-- end wide-2 -->
-        <div class="wide-3">
-            <div class="explore">
-                <h2>Meet the Suburb Team</h2>
-                <h5 class="team-color">Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>Lorem Ipsum has been the industry's standard dummy text ever since</h5>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="item col-md-4 col-md-offset-2 col-sm-6 col-xs-12">
-                        <div class="image" style="background:url(http://placehold.it/360X450) center">
-                            <div class="img-info">
-                                <div class="row">
-                                    <div class="half col-xs-7">
-                                        <h3><a href="agent_profile.html">Lisa Milk</a></h3>
-                                        <h6>Realtor</h6>
-                                    </div>
-                                    <div class="half col-xs-5 info-right">
-                                        <p></p>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <p>“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry”</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
-                        <div class="image" style="background:url(http://placehold.it/360X450) center">
-                            <div class="img-info">
-                                <div class="row">
-                                    <div class="half col-xs-7">
-                                        <h3><a href="agent_profile.html">Jason Satti</a></h3>
-                                        <h6>Superhero</h6>
-                                    </div>
-                                    <div class="half col-xs-5 info-right">
-                                        <p>415 Deals Done</p>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <p>“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry”</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <span class="ffs-bs"><a href="about_us.html" class="btn btn-default btn-large">more about us</a></span>
-        </div>
-        <!-- end wide-3 -->
-        <div class="container">
-            <section class="block testimonials">
-                <header class="center">
-                    <h2 class="no-border">We love Suburb Work!</h2>
-                </header>
-                <div class="owl-carousel testimonials-carousel">
-                    <blockquote class="item">
-                        <aside class="cite">
-                            <p class="team-color">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled"</p>
-                        </aside>
-                        <figure>
-                            <div class="image">
-                                <img src="http://placehold.it/55X55" alt="">
-                            </div>
-                            <p>Johan Nordquist</p>
-                            <p class="team-color">Someone From Company</p>
-                        </figure>
-                    </blockquote>
-                    <blockquote class="item">
-                        <aside class="cite">
-                            <p class="team-color">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled"</p>
-                        </aside>
-                        <figure>
-                            <div class="image">
-                                <img src="http://placehold.it/55X55" alt="">
-                            </div>
-                            <p>Sara Genergy</p>
-                            <p class="team-color">Someone From Company</p>
-                        </figure>
-                    </blockquote>
-                    <blockquote class="item">
-                        <aside class="cite">
-                            <p class="team-color">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled"</p>
-                        </aside>
-                        <figure>
-                            <div class="image">
-                                <img src="http://placehold.it/55X55" alt="">
-                            </div>
-                            <p>Sara Strawberry</p>
-                            <p class="team-color">Someone From Company</p>
-                        </figure>
-                    </blockquote>
-                </div>
-            </section>
-        </div> 
-        <!-- end container -->
-        <div class="wide-3">
-            <div class="container">
-                <div class="logo-cont">
-                    <div class="logos" style="background:url(http://placehold.it/190X80) center no-repeat"></div>
-                </div>
-                <div class="logo-cont">
-                    <div class="logos" style="background:url(http://placehold.it/190X80) center no-repeat"></div>
-                </div>
-                <div class="logo-cont">
-                    <div class="logos" style="background:url(http://placehold.it/190X80) center no-repeat"></div>
-                </div>
-                <div class="logo-cont">
-                    <div class="logos" style="background:url(http://placehold.it/190X80) center no-repeat"></div>
-                </div>
-                <div class="logo-cont">
-                    <div class="logos" style="background:url(http://placehold.it/190X80) center no-repeat"></div>
-                </div>
-            </div>
-        </div>
-        <!-- end wide-3 -->
-    </div>
-    <!-- end Page Content -->
-		<!-- Start Footer -->
-    <div id="footer"></div>
-    <!-- End Footer -->
-	</div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-	<!-- Modal login, register, custom gallery -->
-	<div id="login-modal-open"></div>
-	<div id="register-modal-open"></div>
-	<div class="custom-galery">
-		<input type="checkbox" class="gal" id="op">
-		<div class="lower"></div>
-		<div class="overlay overlay-hugeinc">
-			<label for="op"></label>
-			<nav>
-				<!-- Owl carousel -->
-				<div class="owl-carousel owl-theme carousel-full-width owl-demo-3">
-					<div class="item" style="background-image: url(http://placehold.it/950X800);"></div>
-					<div class="item" style="background-image: url(http://placehold.it/800X650);"></div>
-				</div>
-				<!-- End Owl carousel -->
-			</nav>
-		</div>
-	</div>
-	<!-- End Modal login, register, custom gallery -->
+  <!-- =============================================== -->
+
+  <!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Alexander Pierce</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Layout Options</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="../widgets.html">
+            <i class="fa fa-th"></i> <span>Widgets</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">Hot</small>
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Charts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>UI Elements</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>Forms</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Tables</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="../calendar.html">
+            <i class="fa fa-calendar"></i> <span>Calendar</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-red">3</small>
+              <small class="label pull-right bg-blue">17</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="../mailbox/mailbox.html">
+            <i class="fa fa-envelope"></i> <span>Mailbox</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-yellow">12</small>
+              <small class="label pull-right bg-green">16</small>
+              <small class="label pull-right bg-red">5</small>
+            </span>
+          </a>
+        </li>
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Examples</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+            <li><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+            <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+            <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+            <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+            <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+            <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+            <li class="active"><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+            <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Multilevel</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> Level One
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li class="treeview">
+                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+          </ul>
+        </li>
+        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li class="header">LABELS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- =============================================== -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Blank page
+        <small>it all starts here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Title</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          Start creating your amazing application!
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          Footer
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.sidebar-menu').tree()
+  })
+</script>
+</body>
 {% endblock %}
 {% block footerExtra %}
 
   
  
-  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/infobox.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.placeholder.js"></script>
-    <script type="text/javascript" src="assets/js/markerwithlabel_packed.js"></script>
-    <script type="text/javascript" src="assets/js/masonry.pkgd.min.js"></script>
-    <script type="text/javascript" src="assets/js/selectize.min.js"></script>
-    <script type="text/javascript" src="assets/js/custom-map.js"></script>
-    <script type="text/javascript" src="assets/js/custom.js"></script>
-    <script>
-                                                                _latitude = 40.719457;
-                                                                _longitude = -73.989642;
-                                                                createHomepageGoogleMap(_latitude, _longitude);
-    </script>
 {% endblock %}
