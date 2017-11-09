@@ -58,7 +58,7 @@ $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
-    echo 'This is realestate project';
+     $app->render('index.html.twig');
 });
 
 require_once 'users.php';

@@ -1,8 +1,21 @@
 {% extends "master.html.twig" %}
 
 {% block title %}Register{% endblock %}
-
 {% block headextra %}
+   {% block headextra %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-rtl.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
     <script>
         $(document).ready(function () {
             // respond to all events that may change the value of input
@@ -16,6 +29,7 @@
 {% endblock %}
 
 {% block content %}
+    <body>
     {% if errorList %}
         <ul>
             {% for error in errorList %}
@@ -23,24 +37,57 @@
                 {% endfor %}
         </ul>
     {% endif %}
-
-    <form method="post" enctype="multipart/form-data">
-        Name: <input type="text" name="name" value="{{v.name}}"><br> 
-        Address: <input type="text" name="address" value="{{v.address}}"><br> 
-        Phone: <input type="text" name="phone" value="{{v.phone}}"><br> 
-        Image: <input type="file" name="userImage" ><br>
-        Role:
-        <select name="userRole">
-            <option value="Admin">Admin</option>
-            <option value="Buyer">Buyer</option>
-            <option value="Seller">Seller</option>
-        </select><br> 
-        Email: <input type="email" name="email" value="{{v.email}}"><span id="isTaken"></span><br>
-       
-        Password: <input type="password" name="pass1"><br>
-        Password (repeated): <input type="password" name="pass2"><br>
-
-        <input type="submit" value="Register">
-    </form>
-
+    
+    <div id="modal-register" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2>Create an Account</h2>
+                    <span>It takes few minutes</span>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input  type="text" name="name" value="{{v.name}}" placeholder="Name:" required>					
+                        </div>		
+                        <div class="form-group">
+                            <input type="text" name="address" value="{{v.address}}" placeholder="Address:" required>					
+                        </div>
+                        <input type="text" name="phone" value="{{v.phone}}" placeholder="Phone:" required>					
+                    </div>
+                    <div class="form-group">
+                        <select name="userRole">
+                            <option value="Admin">Admin</option>
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                       <input type="email" name="email" value="{{v.email}}" placeholder="Email:" required><span id="isTaken"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pass1" placeholder="Password:" required>
+                    </div>
+                    <div class="form-group">
+                       <input type="password" name="pass2" placeholder="RePassword:" required>
+                    </div>
+                     <div class="form-group">
+                       <input type="file" name="userImage" >
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group clearfix">					
+                    <span>Do u have an account? <a href="#">Sign In</a></span>					
+                    <button type="submit" class="btn btn-primary">Join</button>		
+                </div>
+                <div>
+                    <span class="terms">By clicking JOIN button you agree with our <br> <a href="terms_and_conditions.html" target="blank">Terms and conditions</a></span>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
 {% endblock %}
