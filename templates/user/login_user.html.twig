@@ -15,13 +15,11 @@
 
 {%endblock %}
 {% block content %}
-
-
-
-    <body class="hold-transition login-page">
-        {% if error %}
+     {% if error %}
             <p>Login invalid. Try again or <a href="/user/register">register</a>.</p>
         {% endif %}
+    <body class="hold-transition login-page">
+       
         <div class="login-box">
             <div class="login-logo">
                 <a href="../../index2.html"><b>Real</b>Estate</a>
