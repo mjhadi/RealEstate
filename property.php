@@ -194,3 +194,10 @@ $app->post('/property/delete/:id', function($id) use ($app) {
         $app->render('/property/property_delete_success.html.twig');
     }
 });
+// google maps
+
+$app->get('/property/googlemap/', function() use ($app) {
+   
+    $app->render("/property/googlemap.html.twig");
+});
+

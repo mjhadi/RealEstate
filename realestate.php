@@ -66,5 +66,6 @@ require_once 'news.php';
 require_once 'photo.php';
 require_once 'property.php';
 require_once 'chats.php';
+
 $app->run();
 
