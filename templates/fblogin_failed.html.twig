@@ -1,0 +1,12 @@
+{% extends "master.html.twig" %}
+
+{% block title %}{{"Facebook Login Failed"|trans}}{% endblock %}
+
+
+{% block content %}
+
+    <h1>{{"Login with your facebook account is denied due to missing or invalid data"}}</h1>
+    <a href="/user/register">{{"Please register an account with us"}}</a>
+
+
+{% endblock %}
