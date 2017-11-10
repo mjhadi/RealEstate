@@ -389,3 +389,13 @@ $app->post('/user/profile', function() use ($app) {
         $app->render('/user/register_user_success.html.twig');
     }
 });
+
+//get list of user
+$app->get('/chat/send', function() use ($app) {
+    if (!$_SESSION['user'] ) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $list = DB::query("SELECT * FROM users");
+    $app->render("/chat/chat.html.twig", array('list' => $list));
+});
