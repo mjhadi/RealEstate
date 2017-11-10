@@ -65,11 +65,12 @@ $app->get('/', function() use ($app) {
      $app->render('index1.html.twig');
 });
 
+
 require_once 'users.php';
 require_once 'news.php';
 require_once 'photo.php';
 require_once 'property.php';
 require_once 'messages.php';
-
+require_once 'fbauth.php';
 $app->run();
 
