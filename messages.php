@@ -50,7 +50,8 @@ $app->post('/chat/send', function() use ($app, $log) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-        DB::insert('messages', array($values));
+    
+        DB::insert('chats', array($values));
         $app->render('/chat/send_success.html.twig');
     }
 });
