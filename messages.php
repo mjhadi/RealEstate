@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
 }
 // View of list of chat 
 $app->get('/chat/list', function() use ($app) {
-    if (!$_SESSION['user'] ) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -21,7 +21,7 @@ $app->get('/chat/list', function() use ($app) {
 });
 // send message
 $app->get('/chat/send', function() use ($app) {
-    if (!$_SESSION['user'] ) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -32,36 +32,25 @@ $app->post('/chat/send', function() use ($app, $log) {
     $name = $app->request()->post('name');
     $email = $app->request()->post('email');
     $message = $app->request()->post('message');
-    
+    $userId2 = $app->request()->post('userId2');
     //
-    $values = array('name' => $name, 'email' => $email, 'message' => $message);
+    $values = array('name' => $name, 'email' => $email, 'message' => $message, 'userId2' => $userId2);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
         $values['name'] = '';
         array_push($errorList, "Name must be between 2 and 50 characters long");
     }
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) == FALSE) {
-        $values['email'] = '';
-        array_push($errorList, "Email must look like a valid email");
-    } else {
-        $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
-        if ($row) {
-            $values['email'] = '';
-            array_push($errorList, "Email already in use");
-        }
-    }
-   
+    
 
+    $values['userId1'] = $_SESSION['user']['userId'];
     //
     if ($errorList) { // 3. failed submission
         $app->render('/chat/send.html.twig', array(
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-         
-        
-        DB::insert('messages', array('name' => $name, 'email' => $email, 'message' => $message));
+        DB::insert('messages', array($values));
         $app->render('/chat/send_success.html.twig');
     }
 });
