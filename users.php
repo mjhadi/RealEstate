@@ -32,8 +32,16 @@ $app->post('/user/login', function() use ($app , $log) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
+        $_SESSION['facebook_access_token'] = array();
         $app->render('/user/login_user_success.html.twig', array('userSession' => $_SESSION['user']));
     }
+});
+
+// User Logout
+$app->get('/user/logout', function() use ($app, $log) {
+    $_SESSION['user'] = array();
+    $_SESSION['facebook_access_token'] = array();
+    $app->render('logout_user.html.twig');
 });
 
 // Is user email registered
