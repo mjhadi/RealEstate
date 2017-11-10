@@ -25,5 +25,11 @@
         {% else %}
             <tr><td colspan="6"> You have no property</td></tr>
         {% endfor %}
-    </table>    
+    </table>   
+        
+        {% for a in v.adResults %}
+            <p><a href='/add/details/{{a.id}}'>{{ a.title }}</a></p>
+        {% else %}
+            <p>No ads found matching this search</p>
+        {% endfor %}
 {% endblock %}
