@@ -8,5 +8,9 @@ $fb = new Facebook\Facebook([
   'persistent_data_handler' => 'session'
 ]);
 
+$helper = $fb->getRedirectLoginHelper();
+//$permissions = ['public_profile', 'email', 'user_location']; // optional
+$loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogin-callback.php', $permissions);
+$logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogout-callback.php', $permissions);
 
 
