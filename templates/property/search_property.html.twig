@@ -1,0 +1,35 @@
+{# empty Twig template #}
+
+{% block title %}Search Property{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+        <input type='text' name='search' value='{{v.search}}'/>
+        <input type="checkbox" name="location" value="location"> Location
+        <input type="checkbox" name="price" value="price"> Price <br>
+        <input type='submit' value='Search' />
+    </form>
+
+        <h2>Search Results </h2>
+        <table border=1>
+          <tr><th>#</th><th>PropertyType</th><th>Latitude</th><th>Longitude</th><th>Beds</th>
+              <th>Baths</th><th>Price</th><th>SqureFeet</th><th>Image</th></tr>
+        {% for p in v %}
+                <tr class="{% if loop.index is odd %}rowodd{% else %}roweven{% endif %}">
+                    <td>{{p.propertyId}}</td>
+                    <td>{{p.propertyType}}</td>
+                    <td>{{p.latitude}}</td>
+                    <td>{{p.longitude}}</td>
+                    <td>{{p.beds}}</td>
+                    <td>{{p.baths}}</td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.squreFeet}}</td> 
+                    <td><img src="{{p.imagePath}}"  width="150"></td>                    
+                </tr>
+        {% else %}
+            <tr><td colspan="6"> We have no property</td></tr>
+        {% endfor %}       
+        
+
+{% endblock %} 
