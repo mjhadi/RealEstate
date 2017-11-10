@@ -1,8 +1,27 @@
-<form method="post" >
-       
-        Name:  <input type="text"  name="name" value="{{v.name}}"><br>
-        Message: <textarea name="message"> {{v.message}}</texteare>
+{% if errorList %}
+        <ul>
+            {% for error in errorList %}
+                <li>{{error}}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
+{% block content %}
+    <form method="post" >
+
+        Name:  <input type="text"  name="name" ><br>
+        Message: <textarea name="message"> </textarea><br>
         email: <input type="email" name="email" ><br>
-       
+        Receiver : 
+        <select  name="userId2">
+            {% for n in list %}
+
+
+                <option value="{{n.userId}}">{{n.name}}</option>
+
+
+            {% endfor %}
+        </select >
+        <br/>
         <input type="submit" value="send">
     </form>
+{% endblock %}

@@ -389,5 +389,13 @@ $app->get('/chat/send', function() use ($app) {
         return;
     }
     $list = DB::query("SELECT * FROM users");
-    $app->render("/chat/chat.html.twig", array('list' => $list));
+    $app->render("/chat/send.html.twig", array('list' => $list));
 });
+// Fetch all countries list
+  function getUsers() {
+   
+      $list = DB::query("SELECT * FROM users");
+      
+        return $list;
+     
+   }
