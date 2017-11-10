@@ -2,48 +2,54 @@
 
 {% block title %}Google map{% endblock %}
 {% block headextra %}
+ {% for p in list %}
+  <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-    <script>
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      var map;
+      var infowindow;
 
-        function initMap() {
+      function initMap() {
+        var pyrmont = {lat: {{p.latitude}}, lng: {{p.longitude}}};
 
-            var posLatLng = {lat:{{property.latitude}}, lng:{{property.longitude}}};
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: pyrmont,
+          zoom: 15
+        });
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: posLatLng,
-                zoom: 15
-            });
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 500,
+          type: ['store']
+        }, callback);
+      }
 
-            var infowindow = new google.maps.InfoWindow();
-            var service = new google.maps.places.PlacesService(map);
-          var image = '/images/homepointer.png';
-            var marker = new google.maps.Marker({
-                map: map,
-                position: posLatLng,
-                title: "{{property.propertyType}}",
-                icon:image
-            });
-
-            service.getDetails({
-                placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-            }, function (place, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                                'Place ID: ' + place.place_id + '<br>' +
-                                place.formatted_address + '</div>');
-                        infowindow.open(map, this);
-                    });
-
-                }
-            });
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
         }
+      }
 
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
     </script>
+      {% endfor %}
 {%endblock %}
 {% block content %}
     <!-- Body content -->
@@ -151,3 +157,4 @@
 
 
 {% endblock %}
+

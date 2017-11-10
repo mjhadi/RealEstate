@@ -58,14 +58,14 @@ $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
-     $app->render('index.html.twig');
+     $app->render('index1.html.twig');
 });
 
 require_once 'users.php';
 require_once 'news.php';
 require_once 'photo.php';
 require_once 'property.php';
-require_once 'chats.php';
+require_once 'messages.php';
 
 $app->run();
 

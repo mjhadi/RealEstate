@@ -153,13 +153,31 @@ $app->post('/property/delete/:id', function($id) use ($app) {
         $app->render('/property/property_delete_success.html.twig');
     }
 });
-// google maps
+// google maps for all property
+
+$app->get('/property/googlemaps', function() use ($app) {
+   if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+         $userId = $_SESSION['user']['userId'];
+   $propertyList = DB::query("SELECT * FROM property WHERE userId =%i", $userId);
+    if (!$propertyList) {
+        $app->render("/not_found.html.twig");
+        return;
+    }
+    $app->render("/property/google_maps_list.html.twig", array('list'=>$propertyList));
+});
+
+
+// google maps for one property
 
 $app->get('/property/googlemap/:id', function($id) use ($app) {
    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
+
     $property = DB::queryFirstRow("SELECT * FROM property WHERE propertyId=%d AND userId=%i", $id, $_SESSION['user']['userId']);
     if (!$property) {
         $app->render("/not_found.html.twig");
