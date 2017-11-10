@@ -55,6 +55,10 @@ if (!isset($_SESSION['user'])) {
 }
 
 $twig = $app->view()->getEnvironment();
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+    $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
+    $twig->addGlobal('loginUrl', $loginUrl);
+}
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {

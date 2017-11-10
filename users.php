@@ -6,12 +6,45 @@ if (false) {
     $log = new Logger('main');
 }
 
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+//sessions and Cookies
+    $helper = $fb->getRedirectLoginHelper();
+    $permissions = ['public_profile', 'email', 'user_location']; // optional
+    $loginUrl = $helper->getLoginUrl('http://fastfood-online.ipd8.info/fblogin-callback.php', $permissions);
+    $logoutUrl = $helper->getLoginUrl('http://fastfood-online.ipd8.info/fblogout-callback.php', $permissions);
+}
+
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
+if (!isset($_SESSION['facebook_access_token'])) {
+    $_SESSION['facebook_access_token'] = array();
+}
+
 // User Login 
 $app->get('/user/login', function() use ($app) {
+    //if a fb user than check id does already have a record in the users table, 
+    if ($_SESSION['facebook_access_token']) {
+        $userID = DB::queryFirstField('SELECT userId from users WHERE socialId = %s', $_SESSION['facebook_access_token']['userId']);
+        if (!$userID) {
+            $result = DB::insert('users', array(
+                        'socialId' => $_SESSION['facebook_access_token']['userId'],
+            ));
+            if ($result) {
+                $userID = DB::insertId();
+                $log->debug(sprintf("Regisetred fbUsere %s with id %s", $_SESSION['facebook_access_token']['userId'], $userID));
+                $_SESSION['facebook_access_token']['userID'] = $userID;
+            } else {
+                //add the userId to the fbUser session for convenience
+                $log->debug(sprintf("Failed to register fbUsere %d", $_SESSION['facebook_access_token']['userId']));
+                $_SESSION['facebook_access_token'] = null;
+                $app->render('fblogin_failed.html.twig');
+            }
+        } else {
+            $_SESSION['facebook_access_token']['userID'] = $userID;
+        }
+    }
     $app->render('user/login_user.html.twig');
 });
 
@@ -32,8 +65,16 @@ $app->post('/user/login', function() use ($app , $log) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
+        $_SESSION['facebook_access_token'] = array();
         $app->render('/user/login_user_success.html.twig', array('userSession' => $_SESSION['user']));
     }
+});
+
+// User Logout
+$app->get('/user/logout', function() use ($app, $log) {
+    $_SESSION['user'] = array();
+    $_SESSION['facebook_access_token'] = array();
+    $app->render('logout_user.html.twig');
 });
 
 // Is user email registered
