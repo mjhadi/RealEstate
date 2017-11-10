@@ -6,7 +6,7 @@ use Monolog\Handler\StreamHandler;
 session_start();
 
 require_once 'vendor/autoload.php' ;
-
+require_once 'fbauth.php';
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
 DB::$encoding = 'utf8';
@@ -54,6 +54,11 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
+//$helper = $fb->getRedirectLoginHelper();
+////$permissions = ['public_profile', 'email', 'user_location']; // optional
+//$loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogin-callback.php', $permissions);
+//$logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogout-callback.php', $permissions);
+
 $twig = $app->view()->getEnvironment();
 if ($_SERVER['SERVER_NAME'] != 'localhost') {
     $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
@@ -71,6 +76,6 @@ require_once 'news.php';
 require_once 'photo.php';
 require_once 'property.php';
 require_once 'messages.php';
-require_once 'fbauth.php';
+
 $app->run();
 
