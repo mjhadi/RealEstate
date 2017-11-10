@@ -67,7 +67,7 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
-     $app->render('index.html.twig');
+     $app->render('index1.html.twig');
 });
 
 

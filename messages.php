@@ -55,3 +55,44 @@ $app->post('/chat/send', function() use ($app, $log) {
         $app->render('/chat/send_success.html.twig');
     }
 });
+// all message
+$app->get('/chat/All', function() use ($app) {
+    if (!$_SESSION['user'] ) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+      $userId = $_SESSION['user']['userId'];
+    $msg = DB::query("SELECT * FROM chats WHERE userId1=%i",$userId);
+    $app->render("/chat/all_message.html.twig", array('list' => $msg));
+});
+//delete message
+$app->get('/chat/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $msg = DB::queryFirstRow("SELECT * FROM chats WHERE userId1=%i AND chatId=%i", $_SESSION['user']['userId'], $id);
+    if (!$msg) {
+        $app->render("/not_found.html.twig");
+        return;
+    }
+    $app->render("/chat/chat_delete.html.twig", array('message' => $msg));
+});
+
+$app->post('/chat/delete/:id', function($id) use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    $confirmed = $app->request()->post('confirmed');
+    if ($confirmed != 'true') {
+        $app->render('/not_found.html.twig');
+        return;
+    }
+    DB::delete('chats', "chatId=%i AND userId=%i", $id, $_SESSION['user']['userId']);
+    if (DB::affectedRows() == 0) {
+        $app->render('/not_found.html.twig');
+    } else {
+        $app->render('/chat/chat_delete_success.html.twig');
+    }
+});

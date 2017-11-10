@@ -1,0 +1,28 @@
+{% extends "master.html.twig" %}
+{% block title %}Al Messages{% endblock %}
+{% block content %}
+ <p><a href="/chat/send">Send message</a><p>
+    <table border=1>
+          <tr><th>#</th><th>Name</th><th>email</th><th>message</th><th>date</th>
+            <th>action</th></tr>
+        {% for msg in list %}
+                <tr class="{% if loop.index is odd %}rowodd{% else %}roweven{% endif %}">
+                    <td>{{msg.name}}</td>
+                    <td>{{msg.email}}</td>
+                    <td>{{msg.message}}</td>
+                    <td>{{msg.longitude}}</td>
+                    <td>{{msg.date}}</td>
+                  
+                
+                    <td>
+                        <a href="/property/delete/{{msg.propertyId}}">Delete</a>
+                   
+                      
+                    </td>
+                </tr>
+        {% else %}
+            <tr><td colspan="6"> You have no property</td></tr>
+        {% endfor %}
+    </table>    
+    
+    {% endblock %}
