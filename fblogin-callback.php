@@ -1,110 +1,69 @@
 <?php
 
-require_once 'vendor/autoload.php';
 session_start();
+require_once 'Facebook/autoload.php';
+require_once 'vendor/autoload.php';
 
-require_once 'fbauth.php';
+
+$fb = new Facebook\Facebook([
+  'app_id' => '129597047747220',
+  'app_secret' => '7ae0ff6e48a8d162bb82917837810b08',
+  'default_graph_version' => 'v2.5',
+  'persistent_data_handler' => 'session'
+]);
 
 $helper = $fb->getRedirectLoginHelper();
 
 try {
-  $accessToken = $helper->getAccessToken();
-} catch(Facebook\Exceptions\FacebookResponseException $e) {
-  // When Graph returns an error
-  echo 'Graph returned an error: ' . $e->getMessage();
-  exit;
-} catch(Facebook\Exceptions\FacebookSDKException $e) {
-  // When validation fails or other local issues
-  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  exit;
-}
-
-if (! isset($accessToken)) {
-  if ($helper->getError()) {
-    header('HTTP/1.0 401 Unauthorized');
-    echo "Error: " . $helper->getError() . "\n";
-    echo "Error Code: " . $helper->getErrorCode() . "\n";
-    echo "Error Reason: " . $helper->getErrorReason() . "\n";
-    echo "Error Description: " . $helper->getErrorDescription() . "\n";
-  } else {
-    header('HTTP/1.0 400 Bad Request');
-    echo 'Bad request';
-  }
- // exit;
-}
-
-// Logged in
-
-// The OAuth 2.0 client handler helps us manage access tokens
-$oAuth2Client = $fb->getOAuth2Client();
-
-// Get the access token metadata from /debug_token
-$tokenMetadata = $oAuth2Client->debugToken($accessToken);
-//echo '<h3>Metadata</h3>';
-//var_dump($tokenMetadata);
-
-// Validation (these will throw FacebookSDKException's when they fail)
-$tokenMetadata->validateAppId('129597047747220'); // Replace {app-id} with your app id
-// If you know the user ID this access token belongs to, you can validate it here
-//$tokenMetadata->validateUserId('123');
-$tokenMetadata->validateExpiration();
-
-    $tokenMetadata->validateAppId('129597047747220'); // Replace {app-id} with your app id
-// If you know the user ID this access token belongs to, you can validate it here
-//$tokenMetadata->validateUserId('123');
-$tokenMetadata->validateExpiration();
-  
-
-
-if (! $accessToken->isLongLived()) {
-  // Exchanges a short-lived access token for a long-lived one
-  try {
-    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-  } catch (Facebook\Exceptions\FacebookSDKException $e) {
-    echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
+    $accessToken = $helper->getAccessToken();
+} catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    echo 'Graph returned an error: ' . $e->getMessage();
     exit;
-  }
+} catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+    exit;
+}
 
-  echo '<h3>Long-lived</h3>';
- // var_dump($accessToken->getValue());
-} 
+if (!isset($accessToken)) {
+    if ($helper->getError()) {
+        header('HTTP/1.0 401 Unauthorized');
+        echo "Error: " . $helper->getError() . "\n";
+        echo "Error Code: " . $helper->getErrorCode() . "\n";
+        echo "Error Reason: " . $helper->getErrorReason() . "\n";
+        echo "Error Description: " . $helper->getErrorDescription() . "\n";
+    } else {
+        header('HTTP/1.0 400 Bad Request');
+        echo 'Bad request';
+    }
+    exit;
+}
+$fb->setDefaultAccessToken($accessToken);
 
+try {
+    $response = $fb->get('/me?locale=en_US&fields=id,name,email,first_name,last_name');
+    $userNode = $response->getGraphUser();
+} catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    echo 'Graph returned an error: ' . $e->getMessage();
+    exit;
+} catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+    exit;
+}
 
+//echo 'Logged in as ' . $userNode->getName();
+$fbUser = array(
+    'fName' => $userNode->getFirstName(),
+    'lName' => $userNode->getLastName(),
+    'email' => $userNode->getEmail(),
+    'ID' => $userNode->getId(),
+);
 
-// User is logged in with a long-lived access token.
-// You can redirect them to a members-only page.
-//header('Location: https://fastfood-online.ipd8/');
-// Sets the default fallback access token so we don't have to pass it to each request
-	$fb->setDefaultAccessToken($accessToken);
+$_SESSION['facebook_access_token'] = $fbUser;
+$_SESSION['user'] = array();
 
-	try {
-	  $response = $fb->get('/me?locale=en_US&fields=id,name,email,gender,first_name,last_name,location');
-	  $userNode = $response->getGraphUser();
-	} catch(Facebook\Exceptions\FacebookResponseException $e) {
-	  // When Graph returns an error
-	  echo 'Graph returned an error: ' . $e->getMessage();
-	  exit;
-	} catch(Facebook\Exceptions\FacebookSDKException $e) {
-	  // When validation fails or other local issues
-	  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-	  exit;
-	}
+header("Location:/sociallogin");
 
-	//echo 'Logged in as ' . $userNode->getName();
-        $fbUser = array(
-            'firstName' => $userNode->getFirstName(),
-            'lastName' => $userNode->getLastName(),
-            'email'=> $userNode->getEmail(),
-            'gender' => $userNode->getGender(),
-            'ID' => $userNode->getId(),
-            'location' => $userNode->getLocation(),
-            );
-
-        $_SESSION['facebook_access_token'] = $fbUser;
-        $_SESSION['user'] = array();
-        
-        header("Location: /");  
-         
-         
-         
-	

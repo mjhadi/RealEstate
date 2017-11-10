@@ -4,14 +4,17 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 session_start();
+require_once 'Facebook/autoload.php';
+require_once 'vendor/autoload.php';
+require_once 'config.php';
 
-require_once 'vendor/autoload.php' ;
-require_once 'fbauth.php';
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
+DB::$host = 'ipd10.com';
 DB::$encoding = 'utf8';
 DB::$password = 'b=XdL_Ar[tAm'; //Collage Password
 
+//Error handling
 DB::$error_handler = 'sql_error_handler';
 DB::$nonsql_error_handler = 'nonsql_error_handler';
 
@@ -50,14 +53,22 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger:: DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+//sessions 
+    $helper = $fb->getRedirectLoginHelper();
+    $permissions = ['public_profile', 'email']; // optional
+    $loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
+    $logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
+}
+
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
-//$helper = $fb->getRedirectLoginHelper();
-////$permissions = ['public_profile', 'email', 'user_location']; // optional
-//$loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogin-callback.php', $permissions);
-//$logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogout-callback.php', $permissions);
+if (!isset($_SESSION['facebook_access_token'])) {
+    $_SESSION['facebook_access_token'] = array();
+}
+
 
 $twig = $app->view()->getEnvironment();
 if ($_SERVER['SERVER_NAME'] != 'localhost') {

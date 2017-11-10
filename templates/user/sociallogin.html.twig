@@ -1,0 +1,15 @@
+{# empty Twig template #}
+{% extends "bootstraptransition/master.html.twig" %}
+{% block title %}Login with FB account{% endblock %}
+
+{% block content %}
+    <form action="/">
+          <label>Name</label>
+    <input type="text" name="name" value="{{user.name}}">
+     <label>Email</label>
+    <input type="text" name="email" value="{{user.email}}" >
+    <button >
+    <input type="submit" value="Confirm" />
+</form>
+  
+{% endblock %} 

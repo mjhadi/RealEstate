@@ -1,5 +1,8 @@
 <?php
 
+require_once 'Facebook/autoload.php';
+require_once 'vendor/autoload.php';
+
 //facebook login
 $fb = new Facebook\Facebook([
   'app_id' => '129597047747220',
@@ -8,9 +11,6 @@ $fb = new Facebook\Facebook([
   'persistent_data_handler' => 'session'
 ]);
 
-//$helper = $fb->getRedirectLoginHelper();
-////$permissions = ['public_profile', 'email', 'user_location']; // optional
-//$loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogin-callback.php', $permissions);
-//$logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/fblogout-callback.php', $permissions);
+
 
 
