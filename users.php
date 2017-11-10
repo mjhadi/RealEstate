@@ -24,6 +24,27 @@ if (!isset($_SESSION['facebook_access_token'])) {
 
 // User Login 
 $app->get('/user/login', function() use ($app) {
+    //if a fb user than check id does already have a record in the users table, 
+    if ($_SESSION['facebook_access_token']) {
+        $userID = DB::queryFirstField('SELECT userId from users WHERE socialId = %s', $_SESSION['facebook_access_token']['userId']);
+        if (!$userID) {
+            $result = DB::insert('users', array(
+                        'socialId' => $_SESSION['facebook_access_token']['userId'],
+            ));
+            if ($result) {
+                $userID = DB::insertId();
+                $log->debug(sprintf("Regisetred fbUsere %s with id %s", $_SESSION['facebook_access_token']['userId'], $userID));
+                $_SESSION['facebook_access_token']['userID'] = $userID;
+            } else {
+                //add the userId to the fbUser session for convenience
+                $log->debug(sprintf("Failed to register fbUsere %d", $_SESSION['facebook_access_token']['userId']));
+                $_SESSION['facebook_access_token'] = null;
+                $app->render('fblogin_failed.html.twig');
+            }
+        } else {
+            $_SESSION['facebook_access_token']['userID'] = $userID;
+        }
+    }
     $app->render('user/login_user.html.twig');
 });
 
