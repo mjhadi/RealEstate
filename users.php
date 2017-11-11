@@ -10,9 +10,9 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
-if (!isset($_SESSION['facebook_access_token'])) {
-    $_SESSION['facebook_access_token'] = array();
-}
+//if (!isset($_SESSION['facebook_access_token'])) {
+//    $_SESSION['facebook_access_token'] = array();
+//}
 
 // User Login 
 $app->get('/user/login', function() use ($app) {
