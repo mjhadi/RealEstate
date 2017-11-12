@@ -77,7 +77,8 @@ $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
-     $app->render('index1.html.twig');
+     $propertyList = DB::query("SELECT * FROM property");
+     $app->render('index.html.twig' , array('list'=>$propertyList));
 });
 
 

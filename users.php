@@ -37,7 +37,10 @@ $app->post('/user/login', function() use ($app , $log) {
         unset($row['password']);
         $_SESSION['user'] = $row;
         $_SESSION['facebook_access_token'] = array();
-        $app->render('/user/login_user_success.html.twig', array('userSession' => $_SESSION['user']));
+        
+        $userId = $_SESSION['user']['userId'];
+      $user = DB::queryFirstRow("SELECT * FROM users WHERE userId =%i", $userId);
+        $app->render('/User/profile_user.html.twig', array('userSession' => $_SESSION['user'], 'user' => $user));
     }
 });
 
