@@ -42,28 +42,28 @@ $app->post('/user/login', function() use ($app , $log) {
 });
 
 //Use login with Social account
-$app->get('/user/sociallogin', function() use ($app) {
-     $app->render('user/sociallogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
-});
-$app->post('/user/sociallogin', function() use ($app) {
-    //check if user has an account
-        $row = DB::queryFirstField('SELECT userId from users WHERE email = %s', $_SESSION['facebook_access_token']['email']);
-    if (!$row) {
-       
-        $result = DB::insert('users', array(
-                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
-                    'email' => $_SESSION['facebook_access_token']['email'],
-                    'socialId' => $_SESSION['facebook_access_token']['ID'],
-        ));
-        if ($result) {
-            $userID = DB::insertId();
-            $log->debug(sprintf("Regisetred fbUser %s with userId %s", $_SESSION['facebook_access_token']['first_name'], $userID));
-            $_SESSION['facebook_access_token']['userID'] = $userID;
-        }
-      
-    }
-       $app->render('/user/sociallogin.html.twig');
-});
+//$app->get('/user/sociallogin', function() use ($app) {
+//     $app->render('user/sociallogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+//});
+//$app->post('/user/sociallogin', function() use ($app) {
+//    //check if user has an account
+//        $row = DB::queryFirstField('SELECT userId from users WHERE email = %s', $_SESSION['facebook_access_token']['email']);
+//    if (!$row) {
+//       
+//        $result = DB::insert('users', array(
+//                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
+//                    'email' => $_SESSION['facebook_access_token']['email'],
+//                    'socialId' => $_SESSION['facebook_access_token']['ID'],
+//        ));
+//        if ($result) {
+//            $userID = DB::insertId();
+//            $log->debug(sprintf("Regisetred fbUser %s with userId %s", $_SESSION['facebook_access_token']['first_name'], $userID));
+//            $_SESSION['facebook_access_token']['userID'] = $userID;
+//        }
+//      
+//    }
+//       $app->render('/user/sociallogin.html.twig');
+//});
     
 
 // User Logout
