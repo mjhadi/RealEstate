@@ -56,6 +56,15 @@
 -Hadi - 11/10/2017
 1-login with scoial( facebook, gamil, ..) 
 2- work in the design of news.
+11/11-12/2017 Hana
+1- work in the mini project google maps search.
+-Hana - 11/13/2017
+1-Work in mini project for chat like facebook
+2- search as type ajax dropdown.
+3-design project.
+-Hadi - 11/13/2017
+
+1- work in the design of news.
 
 
 
