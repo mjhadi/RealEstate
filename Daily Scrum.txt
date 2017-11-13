@@ -63,7 +63,6 @@
 2- search as type ajax dropdown.
 3-design project.
 -Hadi - 11/13/2017
-
 1- work in the design of news.
 
 
