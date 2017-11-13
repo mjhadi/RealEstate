@@ -193,7 +193,7 @@ $app->get('/property/search', function() use ($app, $log) {
 //        $app->render("access_denied.html.twig");
 //        return;
 //    }
-    $app->render('/property/search_property.html.twig');
+    $app->render('/property/searchgooglemap.html.twig');
 });
 
 $app->post('/property/search', function() use ($app, $log) {
@@ -215,8 +215,8 @@ $app->post('/property/search', function() use ($app, $log) {
 ////        // Checkbox is selected
 ////        $values = DB::query('SELECT * from property WHERE price LIKE %ss', $search);
 ////    }
-       $values = DB::query('SELECT * from property WHERE latitude BETWEEN %ss AND longitude LIKE %ss', $search, $search);
-    $app->render('/property/search_property.html.twig', array('v' => $values));
+       $list = DB::query('SELECT * from property WHERE latitude BETWEEN %d AND %d AND longitude BETWEEN  %d AND %d', $latA, $latB,$longA,$longB);
+    $app->render('/property/searchgooglemap.html.twig', array('v' => $list));
 });
 
 // calcul distance between 2 latitude and 2 longitude
