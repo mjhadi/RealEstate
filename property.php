@@ -14,7 +14,7 @@ $app->get('/property/:op(/:id)', function($op, $id = -1) use ($app) {
         $app->render('access_denied.html.twig');
         return;
     }
-     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
+    if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
         echo "INVALID REQUEST"; // FIXME on Monday - display standard 404 from slim
         return;
     }
@@ -42,7 +42,7 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
         $app->render('access_denied.html.twig');
         return;
     }
-     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
+    if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
         echo "INVALID REQUEST"; // FIXME on Monday - display standard 404 from slim
         return;
     }
@@ -54,7 +54,7 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
     $price = $app->request()->post('price');
     $squreFeet = $app->request()->post('squreFeet');
     //
-    $values = array('propertyType' => $propertyType, 'latitude' => $latitude, 'longitude' => $longitude, 'beds' => $beds, 
+    $values = array('propertyType' => $propertyType, 'latitude' => $latitude, 'longitude' => $longitude, 'beds' => $beds,
         'baths' => $baths, 'price' => $price, 'squreFeet' => $squreFeet);
 
     $errorList = array();
@@ -90,21 +90,20 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
         array_push($errorList, "The number of beds must be between 1 and 10");
     }
     //validate image
-     $propertyImage = array();
-   
+    $propertyImage = array();
+
     //
-    
+
     if ($errorList) { // 3. failed submission
-        
     } else { // 2. successful submission
         $values['userId'] = $_SESSION['user']['userId'];
         if ($id != -1) {
             DB::update('property', $values, "propertyId=%i", $id);
         } else {
-                DB::insert('property', $values);
+            DB::insert('property', $values);
         }
-  
-        $app->render('/property/property_addedit_success.html.twig' , array('isEditing' => ($id != -1)));
+
+        $app->render('/property/property_addedit_success.html.twig', array('isEditing' => ($id != -1)));
     }
 })->conditions(array(
     'op' => '(edit|add)',
@@ -113,7 +112,7 @@ $app->post('/property/:op(/:id)', function($op, $id = -1) use ($app) {
 
 // Veiw of list of property 
 $app->get('/property/list', function() use ($app) {
-    if (!$_SESSION['user'] ) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -156,24 +155,24 @@ $app->post('/property/delete/:id', function($id) use ($app) {
 // google maps for all property
 
 $app->get('/property/googlemaps', function() use ($app) {
-   if (!$_SESSION['user']) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
-   $userId = $_SESSION['user']['userId'];
-   $propertyList = DB::query("SELECT * FROM property WHERE userId =%i", $userId);
+    $userId = $_SESSION['user']['userId'];
+    $propertyList = DB::query("SELECT * FROM property WHERE userId =%i", $userId);
     if (!$propertyList) {
         $app->render("/not_found.html.twig");
         return;
     }
-    $app->render("/property/google_maps_list.html.twig", array('list'=>$propertyList));
+    $app->render("/property/google_maps_list.html.twig", array('list' => $propertyList));
 });
 
 
 // google maps for one property
 
 $app->get('/property/googlemap/:id', function($id) use ($app) {
-   if (!$_SESSION['user']) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -183,34 +182,56 @@ $app->get('/property/googlemap/:id', function($id) use ($app) {
         $app->render("/not_found.html.twig");
         return;
     }
-    $app->render("/property/google_maps.html.twig", array('property'=>$property));
+    $app->render("/property/google_maps.html.twig", array('property' => $property));
 });
 
 
 // Search Property
 
 $app->get('/property/search', function() use ($app, $log) {
-    if (!$_SESSION['user']) {
-        $app->render("access_denied.html.twig");
-        return;
-    }
+//    if (!$_SESSION['user']) {
+//        $app->render("access_denied.html.twig");
+//        return;
+//    }
     $app->render('/property/search_property.html.twig');
 });
 
 $app->post('/property/search', function() use ($app, $log) {
-    if (!$_SESSION['user']) {
-        $app->render("access_denied.html.twig");
-        return;
-    }
-    $search = $app->request()->post('search');
-    $values = array('search' => $search);
-    if (isset($_GET['location'])) {
-        // Checkbox is selected
-        $values = DB::query('SELECT * from property WHERE latitude LIKE %ss AND longitude LIKE %ss', $search, $search);
-    }
-    if (isset($_GET['price'])) {
-        // Checkbox is selected
-        $values = DB::query('SELECT * from property WHERE price LIKE %ss', $search);
-    }    
+//    if (!$_SESSION['user']) {
+//        $app->render("access_denied.html.twig");
+//        return;
+//    }
+    $latA = $app->request()->post('latA');
+    $latB = $app->request()->post('latB');
+    $longA = $app->request()->post('longA');
+    $longB = $app->request()->post('longB');
+
+    $values = array('latA' => $latA, 'latB' => $latB, 'longA' => $longA, 'longB' => $longB);
+//    if (isset($_GET['location'])) {
+//        // Checkbox is selected
+//        $values = DB::query('SELECT * from property WHERE latitude LIKE %ss AND longitude LIKE %ss', $search, $search);
+//    }
+////    if (isset($_GET['price'])) {
+////        // Checkbox is selected
+////        $values = DB::query('SELECT * from property WHERE price LIKE %ss', $search);
+////    }
+       $values = DB::query('SELECT * from property WHERE latitude BETWEEN %ss AND longitude LIKE %ss', $search, $search);
     $app->render('/property/search_property.html.twig', array('v' => $values));
 });
+
+// calcul distance between 2 latitude and 2 longitude
+function haversineGreatCircleDistance(
+$latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000) {
+    // convert from degrees to radians
+    $latFrom = deg2rad($latitudeFrom);
+    $lonFrom = deg2rad($longitudeFrom);
+    $latTo = deg2rad($latitudeTo);
+    $lonTo = deg2rad($longitudeTo);
+
+    $latDelta = $latTo - $latFrom;
+    $lonDelta = $lonTo - $lonFrom;
+
+    $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                            cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+    return $angle * $earthRadius;
+}
