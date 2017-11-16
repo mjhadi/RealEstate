@@ -68,7 +68,13 @@
 1- search as type ajax dropdown.
 2-design project.
 -Hadi - 11/14/2017
-1- work in the presentation.
+1- work on the design.
+-Hana - 11/15/2017
+1- search as type ajax dropdown.
+2-design project.
+-Hadi - 11/15/2017
+1- work on the design.
+2-Test all functionality 
 
 
 
