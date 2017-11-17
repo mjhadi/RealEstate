@@ -4,9 +4,11 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 session_start();
-//require_once 'Facebook/autoload.php';
-//require_once 'vendor/autoload.php';
-//$hybridauth = new Hybrid_Auth( 'config.php' );
+
+require_once 'Facebook/autoload.php';
+require_once 'vendor/autoload.php';
+require_once 'config.php';
+$hybridauth = new Hybrid_Auth( 'config.php' );
 
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
@@ -53,27 +55,27 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger:: DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
-//if ($_SERVER['SERVER_NAME'] != 'localhost') {
-////sessions 
-//    $helper = $fb->getRedirectLoginHelper();
-//    $permissions = ['public_profile', 'email']; // optional
-//    $loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
-//    $logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
-//}
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+//sessions 
+    $helper = $fb->getRedirectLoginHelper();
+    $permissions = ['public_profile', 'email']; // optional
+    $loginUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
+    $logoutUrl = $helper->getLoginUrl('http://realestate.ipd10.com/callback.php', $permissions);
+}
 
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
-//if (!isset($_SESSION['facebook_access_token'])) {
-//    $_SESSION['facebook_access_token'] = array();
-//}
+if (!isset($_SESSION['facebook_access_token'])) {
+    $_SESSION['facebook_access_token'] = array();
+}
 
 $twig = $app->view()->getEnvironment();
-//if ($_SERVER['SERVER_NAME'] != 'localhost') {
-//    $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
-//    $twig->addGlobal('loginUrl', $loginUrl);
-//}
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+    $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
+    $twig->addGlobal('loginUrl', $loginUrl);
+}
 $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {

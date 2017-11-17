@@ -46,28 +46,45 @@ $app->post('/user/login', function() use ($app , $log) {
 });
 
 //Use login with Social account
-//$app->get('/user/sociallogin', function() use ($app) {
-//     $app->render('user/sociallogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
-//});
-//$app->post('/user/sociallogin', function() use ($app) {
-//    //check if user has an account
-//        $row = DB::queryFirstField('SELECT userId from users WHERE email = %s', $_SESSION['facebook_access_token']['email']);
-//    if (!$row) {
-//       
-//        $result = DB::insert('users', array(
-//                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
-//                    'email' => $_SESSION['facebook_access_token']['email'],
-//                    'socialId' => $_SESSION['facebook_access_token']['ID'],
-//        ));
-//        if ($result) {
-//            $userID = DB::insertId();
-//            $log->debug(sprintf("Regisetred fbUser %s with userId %s", $_SESSION['facebook_access_token']['first_name'], $userID));
-//            $_SESSION['facebook_access_token']['userID'] = $userID;
-//        }
-//      
-//    }
-//       $app->render('/user/sociallogin.html.twig');
-//});
+$app->get('/user/sociallogin', function() use ($app) {
+    $app->render('/user/sociallogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+});
+$app->post('/user/sociallogin', function() use ($app, $log) {
+    $email = $app->request()->post('email');
+
+//check if user has an account
+    $row = DB::queryFirstRow('SELECT * from users WHERE email = %s', $email);
+    if (!$row) {
+        $result = DB::insert('users', array(
+                    'name' => $_SESSION['facebook_access_token']['name'],
+                    'email' => $_SESSION['facebook_access_token']['email'],
+                    'socialId' => $_SESSION['facebook_access_token']['ID'],
+        ));
+        if ($result) {
+            $userID = DB::insertId();
+            $log->debug(sprintf("Regisetred Social User %s with userId %s", $_SESSION['facebook_access_token']['fName'], $userID));
+            $_SESSION['facebook_access_token']['userID'] = $userID;
+        }
+    } else {
+        if ($row['socialId' == NULL]) {
+            $result = DB::update('users', array(
+                        'socialId' => $_SESSION['facebook_access_token']['ID'],
+            ));
+            if (DB::affectedRows() == 0) {
+                echo 'error: record not found'; 
+                return;
+            }
+        }
+    }
+    $user = DB::queryFirstField('SELECT userId from users WHERE email=%s AND socialId =%s', $_SESSION['facebook_access_token']['email'], $_SESSION['facebook_access_token']['ID']);
+    
+    if ($user) {
+        $_SESSION['user']['ID'] = $user;
+        $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
+        $_SESSION['user']['email'] = $_SESSION['facebook_access_token']['email'];
+        $app->render('/user/sociallogin_success.html.twig');
+    }
+});
     
 
 // User Logout
