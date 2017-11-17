@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once 'socialconfig.php';
 
 $helper = $fb->getRedirectLoginHelper();
 
