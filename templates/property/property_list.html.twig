@@ -1,5 +1,26 @@
 {% extends "master.html.twig" %}
 {% block title %}Property list{% endblock %}
+{% block headextra %}
+    
+     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+        <link rel="stylesheet" href="/assets/css/normalize.css">
+        <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/css/fontello.css">
+        <link href="/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="/assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+        <link href="/assets/css/animate.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="/assets/css/bootstrap-select.min.css"> 
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/icheck.min_all.css">
+        <link rel="stylesheet" href="/assets/css/price-range.css">
+        <link rel="stylesheet" href="/assets/css/owl.carousel.css">  
+        <link rel="stylesheet" href="/assets/css/owl.theme.css">
+        <link rel="stylesheet" href="/assets/css/owl.transitions.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/responsive.css">
+    {% endblock %}
 {% block content %}
    <div id="preloader">
             <div id="status">&nbsp;</div>
@@ -44,7 +65,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="assets/img/logo.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img src="/assets/img/logo.png" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -133,21 +154,21 @@
                                 <div class="col-sm-6 col-md-3 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="/{{p.FILE_NAME}}"></a>
+                                            <a href="" ><img src="{{p.imagePath}}" ></a>
                                         </div>
 
                                         <div class="item-entry overflow">
                                             <h5><a href="property-1.html"> {{p.propertyType}} </a></h5>
                                             <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b>{{p.latitude}},{{p.longitude}} </span>
+                                            <span class="pull-left"><b> Area:</b>{{p.latitude}},{{p.longitude}} </span>
                                             <span class="proerty-price pull-right"> $ {{p.price}}</span>
                                             <p style="display: none;">SquaeertFeet: {{p.squreFeet}}</p>
                                             <div class="property-icon">
-                                                <img src="img/icon/bed.png">({{p.beds}})|
-                                                <img src="img/icon/shawer.png">({{p.baths}})|
-                                                <img src="img/icon/cars.png"> <a href="/property/delete/{{p.propertyId}}">Delete</a>
-                                                   <a href="/property/edit/{{p.propertyId}}">Edit</a>
-                                                   <a href="/property/googlemap/{{p.propertyId}}">Goole Maps</a>
+                                                <img src="/assets/img/icon/bed.png">({{p.beds}})|
+                                                <img src="/assets/img/icon/shawer.png">({{p.baths}})|
+                                               <a href="/property/delete/{{p.propertyId}}">Delete</a>
+                        <a href="/property/edit/{{p.propertyId}}">Edit</a>
+                         <a href="/property/googlemap/{{p.propertyId}}">Goole Maps</a>
                                             </div>
                                         </div>
 
@@ -295,7 +316,7 @@
         </div>
 {% endblock %}
 {% block footerExtra %}
- <script src="/assets/js/modernizr-2.6.2.min.js"></script>
+  <script src="/assets/js/modernizr-2.6.2.min.js"></script>
 
         <script src="/assets/js/jquery-1.10.2.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -312,7 +333,6 @@
         <script src="/assets/js/price-range.js"></script>
 
         <script src="/assets/js/main.js"></script>
-  
  
 {% endblock %}
 

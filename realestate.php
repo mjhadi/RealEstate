@@ -5,7 +5,7 @@ use Monolog\Handler\StreamHandler;
 
 session_start();
 //require_once 'Facebook/autoload.php';
-//require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 //$hybridauth = new Hybrid_Auth( 'config.php' );
 
 DB::$dbName = 'cp4809_realestate';
