@@ -25,6 +25,7 @@ $app->post('/user/login', function() use ($app , $log) {
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     $error = false;
     if (!$row) {
+         $log->debug(sprintf("User failed for email %s from IP %s", $email, $_SERVER['REMOTE_ADDR']));
         $error = true; // user not found
     } else {
         if (password_verify($pass, $row['password'])) {
@@ -83,7 +84,8 @@ $app->get('/isemailregistered/:email', function($email) use ($app) {
 });
 
 //Register User
-$app->get('/user/register', function() use ($app) {
+$app->get('/user/register', function() use ($app, $log) {
+      $_SESSION['facebook_access_token'] = array();
     $app->render('/user/register_user.html.twig');
 });
 

@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{#{% extends "master.html.twig" %}#}
 
 {% block title %}News {% if isEditing %}edit{% else %}add{% endif %}{% endblock %}
 
@@ -11,10 +11,13 @@
         </ul>
     {% endif %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         Title: <input type="text" name="title" value="{{v.title}}"><br>
         News body: <textarea name="newsBody">{{v.newsBody}}</textarea><br>
-        Date: <input type="date" name="newsDate" value="{{v.newsDate}}"><br>        
+        Date: <input type="date" name="newsDate" value="{{v.newsDate}}"><br> 
+        lien:<input type="text" name="lien" value="{{v.lien}}"><br> 
+         <input name="newsImage" class="form-control" type="file" id="property-images">
+                <p class="help-block">Select your image .</p>
         <input type="submit" value="{% if isEditing %}Update{% else %}Add{% endif %} news">
     </form>
 

@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="assets/img/logo.png" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="/assets/img/logo.png" alt=""></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -103,19 +103,19 @@
                                 </div>
                                 <div class="col-sm-6 right" >
                                     <p class="date-comments">
-                                        <a href="single.html"><i class="fa fa-calendar-o"></i> {{n.newsDate}}</a>
+                                        <a href="{{n.lien}}"><i class="fa fa-calendar-o"></i> {{n.newsDate}}</a>
                                        
                                     </p>
                                 </div>
                             </div>
                             <div class="image wow fadeInLeft animated">
-                                <a href="single.html">
-                                    <img src="assets/img/blog2.jpg" class="img-responsive" alt="Example blog post alt">
+                                <a href="{{n.lien}}">
+                                    <img src="{{n.imagePath}}" class="img-responsive">
                                 </a>
                             </div>
                             <p class="intro">{{n.newsBody}}</p>
                             <p class="read-more">
-                                <a href="single.html" class="btn btn-default btn-border">Continue reading</a>
+                                <a href="{{n.lien}}" class="btn btn-default btn-border">Continue reading</a>
                             </p>
                         </section>   
 
@@ -166,7 +166,7 @@
                                                 <li>
                                                     <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                                         <a href="single.html">
-                                                            <img src="assets/img/demo/small-proerty-2.jpg">
+                                                            <img src="/assets/img/demo/small-proerty-2.jpg">
                                                         </a>
                                                         <span class="blg-date">12-12-2016</span>
 
@@ -180,7 +180,7 @@
                                                 <li>
                                                     <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                                         <a href="single.html">
-                                                            <img src="assets/img/demo/small-proerty-2.jpg">
+                                                            <img src="/assets/img/demo/small-proerty-2.jpg">
                                                         </a>
                                                         <span class="blg-date">12-12-2016</span>
 
@@ -194,7 +194,7 @@
                                                 <li>
                                                     <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                                         <a href="single.html">
-                                                            <img src="assets/img/demo/small-proerty-2.jpg">
+                                                            <img src="/assets/img/demo/small-proerty-2.jpg">
                                                         </a>
                                                         <span class="blg-date">12-12-2016</span>
 
@@ -213,11 +213,11 @@
                                         <div class="single-footer news-letter">
                                             <h4>Stay in touch</h4>
                                             <div class="footer-title-line"></div>
-                                            <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
+                                            <p>FOR ANY REQUEST, PLEASE CONTACT THE 514-296-0249 OR THROUGH THIS FORM. WE WILL CALL YOU BACK AS SOON AS POSSIBLE..</p>
 
                                             <form>
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text" placeholder="E-mail ... ">
+                                                    <input class="form-control" type="email" placeholder="E-mail ... ">
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                                     </span>

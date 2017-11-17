@@ -64,11 +64,12 @@
 3-design project.
 -Hadi - 11/13/2017
 1- work in the design of news.
--Hana - 11/14/2017
-1- search as type ajax dropdown.
+-Hana - 11/15/2017
+1- file uploads for the images.
 2-design project.
--Hadi - 11/14/2017
+-Hadi - 11/15/2017
 1- work in the presentation.
+
 
 
 

@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{#{% extends "master.html.twig" %}
 {% block title %}Photo {% if isEditing %}edit{% else %}add{% endif %}{% endblock %}
 
 {% block content %}
@@ -18,5 +18,10 @@
         <input type="submit" value="{% if isEditing %}updat{% else %}Add{% endif %}  photo">
     </form>
 
-{% endblock %}
+{% endblock %}#}
 
+<form method="POST" action="/photo/add" enctype="multipart/form-data">
+            <label>Select file to upload:</label>
+            <input type="file" name="newfile">
+            <button type="submit">Upload</button>
+        </form>
