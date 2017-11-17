@@ -5,8 +5,8 @@ use Monolog\Handler\StreamHandler;
 
 session_start();
 //require_once 'Facebook/autoload.php';
-require_once 'vendor/autoload.php';
-$hybridauth = new Hybrid_Auth( 'config.php' );
+//require_once 'vendor/autoload.php';
+//$hybridauth = new Hybrid_Auth( 'config.php' );
 
 DB::$dbName = 'cp4809_realestate';
 DB::$user = 'cp4809_realestat';
@@ -78,7 +78,7 @@ $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
      $propertyList = DB::query("SELECT * FROM property");
-     $app->render('index1.html.twig' , array('list'=>$propertyList));
+     $app->render('index.html.twig' , array('list'=>$propertyList));
 });
 
 
