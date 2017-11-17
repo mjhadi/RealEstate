@@ -64,22 +64,26 @@
 3-design project.
 -Hadi - 11/13/2017
 1- work in the design of news.
+-Hadi - 11/14/2017
+1- work on the design.
+-Hana - 11/14/2017
+1- search as type ajax dropdown.
+2-design project.
 -Hana - 11/15/2017
 1- file uploads for the images.
 2-design project.
-<<<<<<< HEAD
--Hadi - 11/15/2017
-1- work in the presentation.
-=======
--Hadi - 11/14/2017
-1- work on the design.
--Hana - 11/15/2017
-1- search as type ajax dropdown.
-2-design project.
--Hadi - 11/15/2017
+-Hana - 11/16/2017
+1-design project.
+2- test fonctionnalites.
+-Hadi - 11/16/2017
 1- work on the design.
 2-Test all functionality 
->>>>>>> 1b921c1e5f8ec581ca4607cffc334c32562503b8
+-Hana - 11/17/2017
+1-work in the presentation.
+2- Work in the chat.
+-Hadi - 11/17/2017
+1- work in the presentation
+
 
 
 
