@@ -4,12 +4,20 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 session_start();
+<<<<<<< HEAD
+=======
+
+>>>>>>> c22269499f271c10e039981aaa531673b3f8a4c6
 
 
 //require_once 'Facebook/autoload.php';
 require_once 'vendor/autoload.php';
 require_once 'config.php';
+<<<<<<< HEAD
 //$hybridauth = new Hybrid_Auth( 'config.php' );
+=======
+$hybridauth = new Hybrid_Auth( 'config.php' );
+>>>>>>> c22269499f271c10e039981aaa531673b3f8a4c6
 
 //require_once 'Facebook/autoload.php';
 require_once 'vendor/autoload.php';
