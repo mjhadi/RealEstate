@@ -96,3 +96,13 @@ $app->post('/chat/delete/:id', function($id) use ($app) {
         $app->render('/chat/chat_delete_success.html.twig');
     }
 });
+$app->get('/chat', function() use ($app) {
+    if (!$_SESSION['user']) {
+        $app->render("access_denied.html.twig");
+        return;
+    }
+    
+    $app->render("/chat/chatInstantane.html.twig");
+});
+
+/*********fcbk chat***/

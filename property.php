@@ -205,18 +205,15 @@ $app->post('/property/search', function() use ($app, $log) {
     $latB = $app->request()->post('latB');
     $longA = $app->request()->post('longA');
     $longB = $app->request()->post('longB');
+    $price = $app->request()->post('price');
+    
+   // $values = array('latA' => $latA, 'latB' => $latB, 'longA' => $longA, 'longB' => $longB);
+   
 
-    $values = array('latA' => $latA, 'latB' => $latB, 'longA' => $longA, 'longB' => $longB);
-//    if (isset($_GET['location'])) {
-//        // Checkbox is selected
-//        $values = DB::query('SELECT * from property WHERE latitude LIKE %ss AND longitude LIKE %ss', $search, $search);
-//    }
-////    if (isset($_GET['price'])) {
-////        // Checkbox is selected
-////        $values = DB::query('SELECT * from property WHERE price LIKE %ss', $search);
-////    }
+       $values = DB::query('SELECT * from property WHERE price LIKE %ss', $price);
+
        $list = DB::query('SELECT * from property WHERE latitude BETWEEN %d AND %d AND longitude BETWEEN  %d AND %d', $latA, $latB,$longA,$longB);
-    $app->render('/property/searchgooglemap.html.twig', array('v' => $list));
+    $app->render('/property/searchgooglemap.html.twig', array('v' => $list, 'p'=>$values));
 });
 
 // calcul distance between 2 latitude and 2 longitude

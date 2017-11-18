@@ -10,22 +10,19 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
-//if (!isset($_SESSION['facebook_access_token'])) {
-//    $_SESSION['facebook_access_token'] = array();
-//}
 
 // User Login 
 $app->get('/user/login', function() use ($app) {
     $app->render('user/login_user.html.twig');
 });
 
-$app->post('/user/login', function() use ($app , $log) {
+$app->post('/user/login', function() use ($app, $log) {
     $email = $app->request()->post('email');
     $pass = $app->request()->post('pass');
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     $error = false;
     if (!$row) {
-         $log->debug(sprintf("User failed for email %s from IP %s", $email, $_SERVER['REMOTE_ADDR']));
+        $log->debug(sprintf("User failed for email %s from IP %s", $email, $_SERVER['REMOTE_ADDR']));
         $error = true; // user not found
     } else {
         if (password_verify($pass, $row['password'])) {
@@ -38,10 +35,11 @@ $app->post('/user/login', function() use ($app , $log) {
         unset($row['password']);
         $_SESSION['user'] = $row;
         $_SESSION['facebook_access_token'] = array();
-        
+
+
         $userId = $_SESSION['user']['userId'];
-      $user = DB::queryFirstRow("SELECT * FROM users WHERE userId =%i", $userId);
-        $app->render('/User/profile_user.html.twig', array('userSession' => $_SESSION['user'], 'user' => $user));
+        $user = DB::queryFirstRow("SELECT * FROM users WHERE userId =%i", $userId);
+        $app->render('/user/profile_user.html.twig', array('userSession' => $_SESSION['user'], 'user' => $user));
     }
 });
 
@@ -71,13 +69,13 @@ $app->post('/user/sociallogin', function() use ($app, $log) {
                         'socialId' => $_SESSION['facebook_access_token']['ID'],
             ));
             if (DB::affectedRows() == 0) {
-                echo 'error: record not found'; 
+                echo 'error: record not found';
                 return;
             }
         }
     }
     $user = DB::queryFirstField('SELECT userId from users WHERE email=%s AND socialId =%s', $_SESSION['facebook_access_token']['email'], $_SESSION['facebook_access_token']['ID']);
-    
+
     if ($user) {
         $_SESSION['user']['ID'] = $user;
         $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
@@ -85,7 +83,7 @@ $app->post('/user/sociallogin', function() use ($app, $log) {
         $app->render('/user/sociallogin_success.html.twig');
     }
 });
-    
+
 
 // User Logout
 $app->get('/user/logout', function() use ($app, $log) {
@@ -102,7 +100,7 @@ $app->get('/isemailregistered/:email', function($email) use ($app) {
 
 //Register User
 $app->get('/user/register', function() use ($app, $log) {
-      $_SESSION['facebook_access_token'] = array();
+    $_SESSION['facebook_access_token'] = array();
     $app->render('/user/register_user.html.twig');
 });
 
@@ -116,7 +114,7 @@ $app->post('/user/register', function() use ($app, $log) {
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
     //
-    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'pathImage' =>$pathImage);
+    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'pathImage' => $pathImage);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
@@ -135,7 +133,7 @@ $app->post('/user/register', function() use ($app, $log) {
     }
     if ($pass1 != $pass2) {
         array_push($errorList, "Passwords don't match");
-    } else { 
+    } else {
         if (strlen($pass1) < 2 || strlen($pass1) > 50) {
             array_push($errorList, "Password too short, must be 6 characters or longer");
         }
@@ -145,7 +143,7 @@ $app->post('/user/register', function() use ($app, $log) {
         }
     }
     //image of user
-     $memberImage = array();
+    $memberImage = array();
     // is file being uploaded
     if ($_FILES['memberImage']['error'] != UPLOAD_ERR_NO_FILE) {
         $memberImage = $_FILES['memberImage'];
@@ -170,9 +168,7 @@ $app->post('/user/register', function() use ($app, $log) {
             }
         }
     } else { // no file uploaded
-      
-            array_push($errorList, "Image is required when creating new product");
-        
+        array_push($errorList, "Image is required when creating new product");
     }
 
 
@@ -182,19 +178,19 @@ $app->post('/user/register', function() use ($app, $log) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-          if ($memberImage) {
+        if ($memberImage) {
             $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $memberImage['name']);
             $imagePath = '/uploads/' . $sanitizedFileName;
             if (!move_uploaded_file($memberImage['tmp_name'], $imagePath)) {
                 $log->err("Error moving uploaded file: " . print_r($memberImage, true));
-                $app->render('internal_error.html.twig');
+                $app->render('error_internal.html.twig');
                 return;
             }
             // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
             $values['pathImage'] = "/" . $imagePath;
         }
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc, 'pathImage'=>$pathImage));
+        DB::insert('users', array('name' => $name, 'email' => $email, 'address' => $address, 'userRole' => $userRole, 'phone' => $phone, 'password' => $passEnc, 'pathImage' => $pathImage));
         $app->render('/user/register_user_success.html.twig');
     }
 });
@@ -285,7 +281,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         $errorList = array();
         if ($pass1 != $pass2) {
             array_push($errorList, "Passwords don't match");
-        } else { 
+        } else {
             if (strlen($pass1) < 2 || strlen($pass1) > 50) {
                 array_push($errorList, "Password too short, must be 6 characters or longer");
             }
@@ -308,7 +304,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
 })->via('GET', 'POST');
 // user profile
 $app->get('/user/profile', function() use ($app) {
-     if (!$_SESSION['user'] ) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
@@ -325,7 +321,7 @@ $app->post('/user/profile', function() use ($app) {
     $pass1 = $app->request()->post('pass1');
     $pass2 = $app->request()->post('pass2');
     //
-    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'pathImage' =>$pathImage);
+    $values = array('name' => $name, 'email' => $email, 'address' => $address, 'pathImage' => $pathImage);
     $errorList = array();
     //
     if (strlen($name) < 2 || strlen($name) > 50) {
@@ -344,7 +340,7 @@ $app->post('/user/profile', function() use ($app) {
     }
     if ($pass1 != $pass2) {
         array_push($errorList, "Passwords don't match");
-    } else { 
+    } else {
         if (strlen($pass1) < 2 || strlen($pass1) > 50) {
             array_push($errorList, "Password too short, must be 6 characters or longer");
         }
@@ -354,7 +350,7 @@ $app->post('/user/profile', function() use ($app) {
         }
     }
     //image of user
-     $memberImage = array();
+    $memberImage = array();
     // is file being uploaded
     if ($_FILES['memberImage']['error'] != UPLOAD_ERR_NO_FILE) {
         $memberImage = $_FILES['memberImage'];
@@ -379,9 +375,7 @@ $app->post('/user/profile', function() use ($app) {
             }
         }
     } else { // no file uploaded
-      
-            array_push($errorList, "Image is required when creating new product");
-        
+        array_push($errorList, "Image is required when creating new product");
     }
 
 
@@ -391,7 +385,7 @@ $app->post('/user/profile', function() use ($app) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-          if ($memberImage) {
+        if ($memberImage) {
             $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $memberImage['name']);
             $imagePath = '/uploads/' . $sanitizedFileName;
             if (!move_uploaded_file($memberImage['tmp_name'], $imagePath)) {
@@ -403,25 +397,25 @@ $app->post('/user/profile', function() use ($app) {
             $values['pathImage'] = "/" . $imagePath;
         }
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        DB::update('users', array('name' => $name, 'email' => $email, 'address' => $address,  'password' => $passEnc, 'pathImage'=>$pathImage));
+        DB::update('users', array('name' => $name, 'email' => $email, 'address' => $address, 'password' => $passEnc, 'pathImage' => $pathImage));
         $app->render('/user/register_user_success.html.twig');
     }
 });
 
 //get list of user
 $app->get('/chat/send', function() use ($app) {
-    if (!$_SESSION['user'] ) {
+    if (!$_SESSION['user']) {
         $app->render("access_denied.html.twig");
         return;
     }
     $list = DB::query("SELECT * FROM users");
     $app->render("/chat/send.html.twig", array('list' => $list));
 });
+
 // Fetch all countries list
-  function getUsers() {
-   
-      $list = DB::query("SELECT * FROM users");
-      
-        return $list;
-     
-   }
+function getUsers() {
+
+    $list = DB::query("SELECT * FROM users");
+
+    return $list;
+}

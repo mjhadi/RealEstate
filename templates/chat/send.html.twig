@@ -1,6 +1,6 @@
 {% extends "master.html.twig" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Chat{% endblock %}
 
 
   
@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="assets/img/logo.png" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="/assets/img/logo.png" alt=""></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,16 +56,16 @@
                     <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('/user/register')" data-wow-delay="0.5s">Register</button>
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
-                    <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                        <a href="/" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s">
+                        <a href="/"  data-delay="200">Home <b class="caret"></b></a>
 
                     </li>
 
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="properties.html">Properties</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/list">Properties</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/add">Property</a></li>
+ <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/photo/add">Images</a></li>
 
-
-                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/chat/send">Chat</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -76,7 +76,7 @@
         <div class="container">
             <div class="row">
                 <div class="page-head-content">
-                    <h1 class="page-title">Home New account / Sign in </h1>               
+                    <h1 class="page-title">Chat / send </h1>               
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
             <div class="col-md-8">
                 <div class="box-for overflow">
                     <div class="col-md-6 col-xs-6 register-blocks">
-                        <h2>New account : </h2> 
+                        <h2>Send Message : </h2> 
                         {% if errorList %}
         <ul>
             {% for error in errorList %}
@@ -108,7 +108,7 @@
                          
                             <div class="form-group">
                                 <label for="Role">Receiver</label>
-                                <select name="userId2"  id="basic" class="selectpicker show-tick form-control">
+                                <select name="userId2"  id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Reciever">
                                      {% for n in list %}
                                    
                                      <option value="{{n.userId}}">{{n.name}}</option>
