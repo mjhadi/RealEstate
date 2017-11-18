@@ -67,16 +67,17 @@
                     <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('/user/register')" data-wow-delay="0.5s">Register</button>
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
-                    <li class="wow fadeInDown"  data-wow-delay="0.1s">
-                        <a href="/" class="dropdown-toggle active"  data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                   <li class="wow fadeInDown" data-wow-delay="0.1s">
+                        <a href="/"  data-delay="200">Home <b class="caret"></b></a>
 
                     </li>
 
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/list">Properties</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/add">Property</a></li>
-
-
-                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/chat/send">Chat</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/photo/add">Images</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/chat/send">Chat</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/list">News</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="#">Contact</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -87,7 +88,7 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Hello : <span class="orange strong">{{user.name}}</span></h1>               
+                        <h1 class="page-title"> Welcome To real estate  : <span class="orange strong">{{user.name}}</span></h1>               
                     </div>
                 </div>
             </div>
@@ -151,7 +152,15 @@
                     
                             <div class="col-sm-5 col-sm-offset-1">
                                 <br>
-                                <input type='submit' class='btn btn-finish btn-primary' name='finish' value='Finish' />
+                                  <div class="pull-right">
+                             
+                                 
+                                  <input type='submit' class='btn btn-finish btn-primary' name='Update' value='Update' />
+                                  </div>
+                                  <div class="pull-left">
+                                   <input type='button' class='navbar-btn nav-button wow fadeInRightt' name='Cancel' value='Cancel' />
+                                  </div>
+                                 <div class="clearfix"></div>  
                             </div>
                             <br>
                     </form>

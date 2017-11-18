@@ -17,14 +17,14 @@
                 zoom: 15
             });
 
-          var infowindow = new google.maps.InfoWindow();
-          var service = new google.maps.places.PlacesService(map);
-          var image = '/images/homepointer.png';
-          var marker = new google.maps.Marker({
+            var infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            var image = '/images/homepointer.png';
+            var marker = new google.maps.Marker({
                 map: map,
                 position: posLatLng,
                 title: "{{property.propertyType}}",
-                icon:image
+                icon: image
             });
 
             service.getDetails({
@@ -96,16 +96,17 @@
                     <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('/user/register')" data-wow-delay="0.5s">Register</button>
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
-                    <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                        <a href="/" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s">
+                        <a href="/"  data-delay="200">Home <b class="caret"></b></a>
 
                     </li>
 
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="properties.html">Properties</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li>
-
-
-                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/list">Properties</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/property/add">Property</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/photo/add">Images</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/chat/send">Chat</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/list">News</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="#">Contact</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -124,13 +125,13 @@
     <!-- End page header -->
     <br>
     <br>
-            <div id="map"></div>
-            <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi_RmcXLnf2aoOIGzGGVPdrnaWQD2jrWs&libraries=places&callback=initMap">
-            </script>
-       
-    {% endblock content %}
-    {% block footerExtra %}
+    <div id="map"></div>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi_RmcXLnf2aoOIGzGGVPdrnaWQD2jrWs&libraries=places&callback=initMap">
+    </script>
+
+{% endblock content %}
+{% block footerExtra %}
     <script src="/assets/js/modernizr-2.6.2.min.js"></script>
 
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
