@@ -13,7 +13,7 @@ $fb = new Facebook\Facebook([
 
 //return 
 //	[
-//	    "base_url"   => "http://slim.local/",
+//	    "base_url"   => "http://realestate.ipd10.com/",
 //	    "providers"  => [
 //	        "Google"   => [
 //	            "enabled" => true,
