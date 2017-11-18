@@ -82,7 +82,7 @@ $twig->addGlobal('userSession', $_SESSION['user']);
 
 $app->get('/', function() use ($app) {
      $propertyList = DB::query("SELECT * FROM property");
-     $app->render('index.html.twig' , array('list'=>$propertyList));
+     $app->render('index1.html.twig' , array('list'=>$propertyList));
 });
 
 

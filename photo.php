@@ -161,8 +161,9 @@ $app->get('/photo/add', function () use ($app) {
     $app->render('/photo/addphotos.html.twig');
 });
 $app->post('/photo/add', function () use ($app) {
+      $errors= array();
    if(isset($_FILES['files'])){
-    $errors= array();
+  
 	foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
 		$file_name = $key.$_FILES['files']['name'][$key];
 		$file_size =$_FILES['files']['size'][$key];
@@ -172,7 +173,7 @@ $app->post('/photo/add', function () use ($app) {
 			$errors[]='File size must be less than 2 MB';
         }	
        $query= DB::insert('images', array('FILE_NAME'=>$file_name,'FILE_SIZE'=>$file_size,'FILE_TYPE'=>$file_type,'propertyId'=>$_SESSION['user']['userId']));
-      //  $query="INSERT into upload_data (`USER_ID`,`FILE_NAME`,`FILE_SIZE`,`FILE_TYPE`) VALUES('$user_id','$file_name','$file_size','$file_type'); ";
+    
        
        $desired_dir="user_data";
         if(empty($errors)==true){
